@@ -10,7 +10,7 @@
  "started_ts": 1791920603.818676,
  "ends_at": "2026-10-13 21:43:23Z",
  "ends_ts": 1791927803.818676,
- "loops": 52,
+ "loops": 54,
  "errors": 0,
  "resumes": 3,
  "publish": false,
@@ -25,7 +25,7 @@
   "min_notional_usd": 10
  },
  "pid": 2506,
- "last_loop": "2026-10-13 20:39:14Z",
- "heartbeat_ts": 1791923954.2668664,
+ "last_loop": "2026-10-13 20:41:14Z",
+ "heartbeat_ts": 1791924074.2671497,
  "status_text": "L\u00e4uft \u2013 Analyse aktiv"
 }
