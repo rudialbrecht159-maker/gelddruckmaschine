@@ -1,0 +1,60 @@
+# GELDDRUCKMASCHINE Trading Session: SIMULATED paper trading only (virtual money, public market data, no keys, no orders).
+# Only users with write access (the repo owner) can run workflow_dispatch -> control is protected by GitHub login.
+name: trading-session
+on:
+  workflow_dispatch:
+    inputs:
+      action:   {description: "start | stop | close_all", required: true, default: start, type: choice, options: [start, stop, close_all]}
+      capital:  {description: "Virtual capital EUR (paper, start only)", required: false, default: "100"}
+      minutes:  {description: "Duration minutes 1..180 (presets 10/15/30/60/120/180)", required: false, default: "60"}
+      strategy: {description: "Strategy (start only)", required: false, default: trend-4h-v1, type: choice,
+                 options: [trend-4h-v1, funding-fade-4h-x1, breakout-1h-v1, test-breakout1h-filtered, test-hf-zscore-5m]}
+      confirm:  {description: "close_all only: type CLOSE ALL", required: false, default: ""}
+permissions: {contents: write}
+env: {GDM_HOST: github-actions, GDM_NO_WATCHDOG: "1", GDM_NO_MIRROR: "1"}
+jobs:
+  control:
+    if: inputs.action != 'start'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: confirm check
+        if: inputs.action == 'close_all' && inputs.confirm != 'CLOSE ALL'
+        run: { echo "::error::close_all rejected: confirm input must be exactly 'CLOSE ALL'"; exit 1; }
+      - uses: actions/checkout@v4
+      - name: commit control file (running session polls it every loop)
+        run: |
+          mkdir -p sessions
+          printf '{"action":"%s","ts":"%s","by":"%s","run":"%s"}\n' "${{ inputs.action }}" "$(date -u '+%Y-%m-%d %H:%M:%S')" "${{ github.actor }}" "${{ github.run_id }}" > sessions/control.json
+          git config user.name "gelddruckmaschine-bot"; git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
+          git add sessions/control.json && git commit -qm "session control: ${{ inputs.action }} (SIMULATED)"
+          for i in 1 2 3 4 5; do git pull --rebase -q -X theirs && git push -q && break; sleep 4; done
+          cat sessions/control.json
+  session:
+    if: inputs.action == 'start'
+    runs-on: ubuntu-latest
+    timeout-minutes: 200          # sessions are capped at 180 min (+ time to manage open positions); hard GitHub limit 6 h
+    concurrency: {group: trading-session, cancel-in-progress: false}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -q pandas numpy requests
+      - name: connectivity check (Hyperliquid public info API)
+        run: curl -s -m 15 -X POST https://api.hyperliquid.xyz/info -H 'Content-Type: application/json' -d '{"type":"allMids"}' | python -c "import json,sys;d=json.load(sys.stdin);print('Hyperliquid reachable, BTC mid',d['BTC'])"
+      - name: run session (60 s loop), state committed every 2 min
+        run: |
+          set -u
+          M="${{ inputs.minutes }}"; python -c "import sys;m=float('$M');sys.exit(0 if 1<=m<=180 else 1)" || { echo "::error::minutes must be 1..180"; exit 1; }
+          git config user.name "gelddruckmaschine-bot"; git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
+          sync() { git add -A sessions public 2>/dev/null; git commit -qm "session state $(date -u +%T) (SIMULATED)" || true; for i in 1 2 3; do git pull --rebase -q -X theirs && git push -q && break; sleep 3; done; }
+          ( while sleep 120; do sync >/dev/null 2>&1; done ) & SYNC=$!
+          CMD='git fetch -q origin main 2>/dev/null; git show origin/main:sessions/control.json 2>/dev/null || echo {}'
+          if python session.py status | grep -q '"status": "\(running\|stopping\)"'; then echo "resuming unfinished session from committed state"; python session.py resume --control-cmd "$CMD" || true
+          else python session.py start --capital "${{ inputs.capital }}" --minutes "$M" --strategy "${{ inputs.strategy }}" --control-cmd "$CMD" || true; fi
+          kill $SYNC 2>/dev/null || true; sync; python session.py status | head -c 2500
+      - name: final commit (always; a crashed job resumes from committed state on next start)
+        if: always()
+        run: |
+          git add -A sessions public 2>/dev/null; git commit -qm "session final $(date -u +%T) (SIMULATED)" || true
+          for i in 1 2 3; do git pull --rebase -q -X theirs && git push -q && break; sleep 3; done

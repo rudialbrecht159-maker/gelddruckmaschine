@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+logs/
+state/
+pages/
+bin/
+.store_path
+screens/
