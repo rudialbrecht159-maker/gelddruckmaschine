@@ -3,3 +3,4 @@
 2026-10-13 19:13:49Z ACTIONS ['OPENED BTC LONG 0.000392574 @ 83226 stop 80500.9 lev 0.29x']
 2026-10-13 19:17:30Z STATE -> stopping (user stop)
 2026-10-13 19:17:51Z ENGINE ERROR OperationalError: attempt to write a readonly database
+2026-10-13 19:21:30Z STATE -> stopping (user stop) FORCE CLOSE
