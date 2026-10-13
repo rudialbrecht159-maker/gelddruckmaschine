@@ -4,3 +4,5 @@
 2026-10-13 21:49:58Z RUN job=38473412319 status=running resume=True
 2026-10-13 21:50:54Z CONTROL stop acknowledged 4.5 s after dispatch (workflow_dispatch)
 2026-10-13 21:50:54Z STATE -> stopping (user stop)
+2026-10-13 21:52:59Z CONTROL close_all acknowledged 2.7 s after dispatch (workflow_dispatch)
+2026-10-13 21:52:59Z STATE -> stopping (user stop) FORCE CLOSE

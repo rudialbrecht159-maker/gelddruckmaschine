@@ -10,7 +10,7 @@
  "started_ts": 1791927995.5660436,
  "ends_at": "2026-10-13 22:01:35Z",
  "ends_ts": 1791928895.5660436,
- "loops": 5,
+ "loops": 6,
  "errors": 0,
  "resumes": 1,
  "host": "github-actions",
@@ -29,7 +29,9 @@
   "2026-10-13 21:46:55Z ACTIONS ['OPENED BTC LONG 0.000761521 @ 83459 stop 80645.9 lev 0.28x']",
   "2026-10-13 21:49:58Z RUN job=38473412319 status=running resume=True",
   "2026-10-13 21:50:54Z CONTROL stop acknowledged 4.5 s after dispatch (workflow_dispatch)",
-  "2026-10-13 21:50:54Z STATE -> stopping (user stop)"
+  "2026-10-13 21:50:54Z STATE -> stopping (user stop)",
+  "2026-10-13 21:52:59Z CONTROL close_all acknowledged 2.7 s after dispatch (workflow_dispatch)",
+  "2026-10-13 21:52:59Z STATE -> stopping (user stop) FORCE CLOSE"
  ],
  "jobs": [
   {
@@ -43,25 +45,26 @@
    "started": "2026-10-13 21:49:58Z"
   }
  ],
- "heartbeat": "2026-10-13 21:50:58Z",
- "heartbeat_ts": 1791928258.7008362,
+ "heartbeat": "2026-10-13 21:52:58Z",
+ "heartbeat_ts": 1791928378.7010953,
  "status_text": "Beenden \u2013 offene Positionen werden verwaltet",
  "control_api": {
-  "calls": 8,
+  "calls": 22,
   "errors": 0,
   "poll_s": 5
  },
- "last_loop": "2026-10-13 21:50:59Z",
- "last_data": "2026-10-13 21:51:21Z",
+ "last_loop": "2026-10-13 21:51:59Z",
+ "last_data": "2026-10-13 21:52:21Z",
  "stop_ack": {
-  "action": "stop",
-  "acked": "2026-10-13 21:50:53Z",
-  "latency_s": 4.5,
+  "action": "close_all",
+  "acked": "2026-10-13 21:52:58Z",
+  "latency_s": 2.7,
   "source": "workflow_dispatch",
-  "run_id": 38473610136,
-  "dispatched": "2026-10-13 21:50:49Z",
-  "url": "https://github.com/rudialbrecht159-maker/gelddruckmaschine/actions/runs/38473610136"
+  "run_id": 38473858705,
+  "dispatched": "2026-10-13 21:52:56Z",
+  "url": "https://github.com/rudialbrecht159-maker/gelddruckmaschine/actions/runs/38473858705"
  },
  "stop_reason": "user stop",
- "stop_requested": "2026-10-13 21:50:53Z"
+ "stop_requested": "2026-10-13 21:50:53Z",
+ "force_close": true
 }
