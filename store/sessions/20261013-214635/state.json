@@ -15,7 +15,7 @@
    "liq": 2094.820823513152,
    "margin_eur": 56.80709135165233,
    "open_ts": 1791927996236,
-   "checked_ts": 1791928199437,
+   "checked_ts": 1791928259381,
    "fund_ts": 1791927996236,
    "fees_eur": 0.02556319110824355,
    "funding_eur": 0.0,
@@ -30,8 +30,8 @@
     "spread_bps": 0.11985593316833167,
     "depth10_usd": 3396187.39445
    },
-   "mark": 83482.5,
-   "upnl_eur": 0.015974916907258326
+   "mark": 83468.5,
+   "upnl_eur": 0.006445699074061736
   }
  },
  "last_bar_processed": {
@@ -47,10 +47,10 @@
  "funding_eur": 0.0,
  "realized_eur": 0.0,
  "fx_eurusd": 1.1188,
- "last_data_ok": "2026-10-13 21:49:59Z",
- "cycles": 4,
+ "last_data_ok": "2026-10-13 21:50:59Z",
+ "cycles": 5,
  "fx_date": "2026-10-13",
- "last_cycle": "2026-10-13 21:49:59Z",
+ "last_cycle": "2026-10-13 21:50:59Z",
  "last_status": "OK",
  "last_problems": [],
  "last_signals": {
@@ -61,53 +61,55 @@
   "SUI": "bar 2026-10-13 20:00:00Z close 1.0533: no entry [3d funding 9.35e-06 (p10 4.24e-06 / p90 1.99e-05), trend up] (bar already processed)"
  },
  "last_actions": [],
- "equity_eur": 199.99041172579902,
- "upnl_eur": 0.015974916907258326,
+ "equity_eur": 199.98088250796582,
+ "upnl_eur": 0.006445699074061736,
  "risk": {
-  "dd": 4.794137100494478e-05,
-  "daily_loss": 4.794137100494478e-05,
-  "blocks": []
+  "dd": 9.558746017090947e-05,
+  "daily_loss": 9.558746017090947e-05,
+  "blocks": [
+   "session Beenden \u2013 offene Positionen werden verwaltet"
+  ]
  },
  "market": {
   "BTC": {
-   "mid": 83482.5,
-   "spread_bps": 0.11978558380498906,
+   "mid": 83468.5,
+   "spread_bps": 0.11980567519483397,
    "funding_1h": 1.25e-05,
-   "oi": 38497.2886,
-   "dayVlm": 3097805174.835199
+   "oi": 38494.85774,
+   "dayVlm": 3045118487.088399
   },
   "ETH": {
-   "mid": 2512.05,
-   "spread_bps": 0.39808124838243286,
+   "mid": 2511.25,
+   "spread_bps": 0.3982080637147389,
    "funding_1h": 1.25e-05,
-   "oi": 1068489.7768,
-   "dayVlm": 1530849872.0630465
+   "oi": 1068505.245,
+   "dayVlm": 1462943047.9021494
   },
   "SOL": {
-   "mid": 107.195,
-   "spread_bps": 0.9328793320588755,
+   "mid": 107.16499999999999,
+   "spread_bps": 0.9331404843003888,
    "funding_1h": 1.25e-05,
-   "oi": 5851026.460000002,
-   "dayVlm": 427822982.07349974
+   "oi": 5851360.419999999,
+   "dayVlm": 393104880.64239985
   },
   "AVAX": {
-   "mid": 10.309999999999999,
-   "spread_bps": 1.9398642095059826,
-   "funding_1h": 9.8265e-06,
-   "oi": 2434600.8000000003,
-   "dayVlm": 13219314.266412003
+   "mid": 10.305,
+   "spread_bps": 1.9408054342541403,
+   "funding_1h": 9.7168e-06,
+   "oi": 2434604.5999999996,
+   "dayVlm": 12938330.249202004
   },
   "SUI": {
-   "mid": 1.05335,
-   "spread_bps": 0.9493520672140218,
-   "funding_1h": 1.24684e-05,
-   "oi": 64249542.8,
-   "dayVlm": 26101963.919350017
+   "mid": 1.0524499999999999,
+   "spread_bps": 0.9501639032732101,
+   "funding_1h": 1.24663e-05,
+   "oi": 64258183.6,
+   "dayVlm": 24016809.69935
   }
  },
  "phase": {
   "start": "2026-10-13 21:46 UTC",
-  "evaluated_at": "2026-10-13 21:50 UTC",
+  "evaluated_at": "2026-10-13 21:51 UTC",
   "start_equity": 200.0,
   "criteria": {
    "net_positive": "Netto > 0 nach Geb\u00fchren",
@@ -132,20 +134,20 @@
      "min_trades",
      "robust_net"
     ],
-    "net_eur": -0.01,
-    "net_pct": -0.0,
+    "net_eur": -0.02,
+    "net_pct": -0.01,
     "trades": 0,
     "trades_in_phase": 0,
     "maxdd_pct": 0.02,
     "best_trade_eur": 0.0,
-    "net_minus_best_eur": -0.01
+    "net_minus_best_eur": -0.02
    }
   ],
   "action": "continue",
   "current_phase": "P1",
-  "recommendation": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.01 \u20ac, 0 Trades, MaxDD 0.02 %).",
+  "recommendation": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.02 \u20ac, 0 Trades, MaxDD 0.02 %).",
   "label_de": "WEITER"
  },
  "phase_action": "continue",
- "phase_note": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.01 \u20ac, 0 Trades, MaxDD 0.02 %)."
+ "phase_note": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.02 \u20ac, 0 Trades, MaxDD 0.02 %)."
 }

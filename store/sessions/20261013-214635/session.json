@@ -10,7 +10,7 @@
  "started_ts": 1791927995.5660436,
  "ends_at": "2026-10-13 22:01:35Z",
  "ends_ts": 1791928895.5660436,
- "loops": 4,
+ "loops": 5,
  "errors": 0,
  "resumes": 1,
  "host": "github-actions",
@@ -43,16 +43,16 @@
    "started": "2026-10-13 21:49:58Z"
   }
  ],
- "heartbeat": "2026-10-13 21:50:53Z",
- "heartbeat_ts": 1791928253.5079515,
+ "heartbeat": "2026-10-13 21:50:58Z",
+ "heartbeat_ts": 1791928258.7008362,
  "status_text": "Beenden \u2013 offene Positionen werden verwaltet",
  "control_api": {
-  "calls": 7,
+  "calls": 8,
   "errors": 0,
   "poll_s": 5
  },
- "last_loop": "2026-10-13 21:49:59Z",
- "last_data": "2026-10-13 21:50:20Z",
+ "last_loop": "2026-10-13 21:50:59Z",
+ "last_data": "2026-10-13 21:51:21Z",
  "stop_ack": {
   "action": "stop",
   "acked": "2026-10-13 21:50:53Z",
