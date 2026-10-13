@@ -6,3 +6,5 @@
 2026-10-13 21:50:54Z STATE -> stopping (user stop)
 2026-10-13 21:52:59Z CONTROL close_all acknowledged 2.7 s after dispatch (workflow_dispatch)
 2026-10-13 21:52:59Z STATE -> stopping (user stop) FORCE CLOSE
+2026-10-13 21:53:18Z ACTIONS ['CLOSED BTC emergency_close @ 83468.5']
+2026-10-13 21:53:18Z ENDED report={"start_capital_eur": 200.0, "end_capital_eur": 199.9379, "net_pnl_eur": -0.0621, "return_pct": -0.031, "trades": 1, "wins": 0, "gross_pnl_eur": -0.0109, "fees_eur": 0.0511, "funding_eur": 0.0, "planned_minutes": 15.0, "actual_minutes": 6.7, "started": "2026-10-13 21:46:35Z", "ended": "2026-10-13 21:53:18Z", "stop_reason": "user stop", "loops": 7, "market_evaluations": 35, "min_order_skips": 0, "engine_errors": 0, "resumes": 1, "jobs": 2, "stop_ack": {"action": "close_all", "acked": "2026-10-13 21:52:58Z", "latency_s": 2.7, "source": "workflow_dispatch", "run_id": 38473858705, "dispatched": "2026-10-13 21:52:56Z", "url": "https://github.com/rudialbrecht159-maker/gelddruckmaschine/actions/runs/38473858705"}, "strategy": "funding-fade-4h-x1", "simulated": true}

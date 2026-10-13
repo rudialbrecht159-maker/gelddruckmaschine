@@ -4,3 +4,4 @@
 2026-10-13 21:49:59Z OK trigger='session' equity=199.9904 actions=[] problems=[]
 2026-10-13 21:50:59Z OK trigger='session' equity=199.9809 actions=[] problems=[]
 2026-10-13 21:51:59Z OK trigger='session' equity=199.9809 actions=[] problems=[]
+2026-10-13 21:52:59Z OK trigger='session' equity=199.9379 actions=['CLOSED BTC emergency_close @ 83468.5'] problems=[]
