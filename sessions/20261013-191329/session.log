@@ -1,3 +1,4 @@
 2026-10-13 19:13:29Z START capital=€100.0 minutes=10.0 strategy=funding-fade-4h-x1
 2026-10-13 19:13:29Z RUN pid=2370 status=running (resume=False)
 2026-10-13 19:13:49Z ACTIONS ['OPENED BTC LONG 0.000392574 @ 83226 stop 80500.9 lev 0.29x']
+2026-10-13 19:17:30Z STATE -> stopping (user stop)
