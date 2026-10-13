@@ -10,9 +10,9 @@
  "started_ts": 1791920603.818676,
  "ends_at": "2026-10-13 21:43:23Z",
  "ends_ts": 1791927803.818676,
- "loops": 23,
+ "loops": 25,
  "errors": 0,
- "resumes": 1,
+ "resumes": 2,
  "publish": false,
  "publish_every_s": 300,
  "host": "github-actions",
@@ -24,8 +24,8 @@
   "max_leverage": 3,
   "min_notional_usd": 10
  },
- "pid": 2366,
- "last_loop": "2026-10-13 20:08:44Z",
- "heartbeat_ts": 1791922124.8557389,
+ "pid": 2435,
+ "last_loop": "2026-10-13 20:12:07Z",
+ "heartbeat_ts": 1791922327.5647576,
  "status_text": "L\u00e4uft \u2013 Analyse aktiv"
 }
