@@ -1,0 +1,107 @@
+{
+ "created": "2026-10-13 19:24:32Z",
+ "balance_eur": 99.9868533597191,
+ "peak_equity_eur": 100.0,
+ "day": "2026-10-13",
+ "day_start_equity_eur": 100.0,
+ "positions": {
+  "BTC": {
+   "side": 1,
+   "entry": 83260.9708,
+   "stop": 80535.89937142856,
+   "qty": 0.0003925665158582327,
+   "notional_usd": 32.68546921393005,
+   "lev": 0.292,
+   "liq": 2089.849534553548,
+   "margin_eur": 29.214756179773012,
+   "open_ts": 1791919472509,
+   "checked_ts": 1791919532986,
+   "fund_ts": 1791919472509,
+   "fees_eur": 0.013146640280897855,
+   "funding_eur": 0.0,
+   "strategy": "funding-fade-4h-x1",
+   "risk_eur": 1.0,
+   "book_at_entry": {
+    "time": 1791919473203,
+    "bid": 83235.0,
+    "ask": 83236.0,
+    "mid": 83235.5,
+    "spread_bps": 0.12014104558751976,
+    "depth10_usd": 3300613.02019
+   },
+   "mark": 83228.5,
+   "upnl_eur": -0.01139341153300656
+  }
+ },
+ "last_bar_processed": {
+  "BTC": 1791892800000,
+  "ETH": 1791892800000,
+  "SOL": 1791892800000,
+  "AVAX": 1791892800000,
+  "SUI": 1791892800000
+ },
+ "halted": false,
+ "halt_reason": null,
+ "fees_eur": 0.013146640280897855,
+ "funding_eur": 0.0,
+ "realized_eur": 0.0,
+ "fx_eurusd": 1.1188,
+ "last_data_ok": "2026-10-13 19:25:32Z",
+ "cycles": 2,
+ "fx_date": "2026-10-13",
+ "last_cycle": "2026-10-13 19:25:32Z",
+ "last_status": "OK",
+ "last_problems": [],
+ "last_signals": {
+  "BTC": "bar 2026-10-13 16:00:00Z close 83,401.0: LONG entry [3d funding 2.97e-06 (p10 4.78e-06 / p90 1.25e-05), trend up] (bar already processed)",
+  "ETH": "bar 2026-10-13 16:00:00Z close 2,515.2: no entry [3d funding 1.61e-06 (p10 6.01e-06 / p90 1.25e-05), trend down] (bar already processed)",
+  "SOL": "bar 2026-10-13 16:00:00Z close 107.330: no entry [3d funding 9.42e-06 (p10 1.86e-06 / p90 1.25e-05), trend up] (bar already processed)",
+  "AVAX": "bar 2026-10-13 16:00:00Z close 10.232: no entry [3d funding 5.79e-06 (p10 -1.50e-06 / p90 1.43e-05), trend up] (bar already processed)",
+  "SUI": "bar 2026-10-13 16:00:00Z close 1.0387: no entry [3d funding 9.30e-06 (p10 4.24e-06 / p90 1.99e-05), trend up] (bar already processed)"
+ },
+ "last_actions": [],
+ "equity_eur": 99.9754599481861,
+ "upnl_eur": -0.01139341153300656,
+ "risk": {
+  "dd": 0.0002454005181390384,
+  "daily_loss": 0.0002454005181390384,
+  "blocks": []
+ },
+ "market": {
+  "BTC": {
+   "mid": 83228.5,
+   "spread_bps": 0.12015115014688478,
+   "funding_1h": 1.25e-05,
+   "oi": 38338.08984,
+   "dayVlm": 3229957786.625719
+  },
+  "ETH": {
+   "mid": 2510.05,
+   "spread_bps": 0.3983984382777596,
+   "funding_1h": 1.25e-05,
+   "oi": 1077011.4842,
+   "dayVlm": 1610510719.0349698
+  },
+  "SOL": {
+   "mid": 107.945,
+   "spread_bps": 0.9263977025341716,
+   "funding_1h": 1.25e-05,
+   "oi": 5851182.759999999,
+   "dayVlm": 439184575.1048
+  },
+  "AVAX": {
+   "mid": 10.2935,
+   "spread_bps": 2.91446058192074,
+   "funding_1h": 3.5694e-06,
+   "oi": 2440175.72,
+   "dayVlm": 13506763.439532002
+  },
+  "SUI": {
+   "mid": 1.0569,
+   "spread_bps": 1.8923266155736396,
+   "funding_1h": 1.25e-05,
+   "oi": 64532548.6,
+   "dayVlm": 27328226.469580013
+  }
+ }
+}
