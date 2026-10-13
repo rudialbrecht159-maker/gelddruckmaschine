@@ -6,11 +6,11 @@
  "day_start_equity_eur": 200.0,
  "positions": {},
  "last_bar_processed": {
-  "BTC": 1791892800000,
-  "ETH": 1791892800000,
-  "SOL": 1791892800000,
-  "AVAX": 1791892800000,
-  "SUI": 1791892800000
+  "BTC": 1791907200000,
+  "ETH": 1791907200000,
+  "SOL": 1791907200000,
+  "AVAX": 1791907200000,
+  "SUI": 1791907200000
  },
  "halted": false,
  "halt_reason": null,
@@ -18,18 +18,18 @@
  "funding_eur": 0.0,
  "realized_eur": 0.0,
  "fx_eurusd": 1.1188,
- "last_data_ok": "2026-10-13 19:59:24Z",
- "cycles": 17,
+ "last_data_ok": "2026-10-13 20:00:24Z",
+ "cycles": 18,
  "fx_date": "2026-10-13",
- "last_cycle": "2026-10-13 19:59:24Z",
+ "last_cycle": "2026-10-13 20:00:24Z",
  "last_status": "OK",
  "last_problems": [],
  "last_signals": {
-  "BTC": "bar 2026-10-13 16:00:00Z close 83,401.0: no entry (bar already processed)",
-  "ETH": "bar 2026-10-13 16:00:00Z close 2,515.2: no entry (bar already processed)",
-  "SOL": "bar 2026-10-13 16:00:00Z close 107.330: no entry (bar already processed)",
-  "AVAX": "bar 2026-10-13 16:00:00Z close 10.232: no entry (bar already processed)",
-  "SUI": "bar 2026-10-13 16:00:00Z close 1.0387: no entry (bar already processed)"
+  "BTC": "bar 2026-10-13 20:00:00Z close 83,270.0: no entry",
+  "ETH": "bar 2026-10-13 20:00:00Z close 2,507.8: no entry",
+  "SOL": "bar 2026-10-13 20:00:00Z close 107.520: no entry",
+  "AVAX": "bar 2026-10-13 20:00:00Z close 10.263: no entry",
+  "SUI": "bar 2026-10-13 20:00:00Z close 1.0533: no entry"
  },
  "last_actions": [],
  "equity_eur": 200.0,
@@ -41,39 +41,39 @@
  },
  "market": {
   "BTC": {
-   "mid": 83269.5,
-   "spread_bps": 0.12009199046469596,
+   "mid": 83281.5,
+   "spread_bps": 0.12007468645497499,
    "funding_1h": 1.25e-05,
-   "oi": 38320.06948,
-   "dayVlm": 3212436496.5516825
+   "oi": 38333.25354,
+   "dayVlm": 3213614259.7545986
   },
   "ETH": {
-   "mid": 2508.75,
-   "spread_bps": 0.3986048829112658,
-   "funding_1h": 1.036e-05,
-   "oi": 1076192.5262000014,
-   "dayVlm": 1605705820.1341488
+   "mid": 2507.45,
+   "spread_bps": 0.3988115416056514,
+   "funding_1h": 1.25e-05,
+   "oi": 1074924.0994000002,
+   "dayVlm": 1607558531.77746
   },
   "SOL": {
-   "mid": 107.57499999999999,
-   "spread_bps": 0.9295840111554838,
+   "mid": 107.515,
+   "spread_bps": 0.9301027763559415,
    "funding_1h": 1.25e-05,
-   "oi": 5815821.539999999,
-   "dayVlm": 441169873.69559985
+   "oi": 5815813.64,
+   "dayVlm": 441193676.8307998
   },
   "AVAX": {
-   "mid": 10.267,
-   "spread_bps": 1.9479887016661812,
-   "funding_1h": 8.031e-07,
-   "oi": 2440787.1599999997,
-   "dayVlm": 13211770.690852005
+   "mid": 10.2595,
+   "spread_bps": 0.9747063697055859,
+   "funding_1h": -2.2783e-06,
+   "oi": 2440783.02,
+   "dayVlm": 13211913.522112003
   },
   "SUI": {
-   "mid": 1.0539,
-   "spread_bps": 1.8977132555268805,
-   "funding_1h": 1.09801e-05,
-   "oi": 64353562.0,
-   "dayVlm": 27540255.966960005
+   "mid": 1.0532499999999998,
+   "spread_bps": 0.9494422027058059,
+   "funding_1h": 1.25e-05,
+   "oi": 64353712.8,
+   "dayVlm": 27540434.60621001
   }
  }
 }
