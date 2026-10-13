@@ -1,0 +1,81 @@
+{
+ "created": "2026-10-13 19:43:24Z",
+ "balance_eur": 200.0,
+ "peak_equity_eur": 200.0,
+ "day": "2026-10-13",
+ "day_start_equity_eur": 200.0,
+ "positions": {},
+ "last_bar_processed": {
+  "BTC": 1791907200000,
+  "ETH": 1791907200000,
+  "SOL": 1791907200000,
+  "AVAX": 1791907200000,
+  "SUI": 1791907200000
+ },
+ "halted": false,
+ "halt_reason": null,
+ "fees_eur": 0.0,
+ "funding_eur": 0.0,
+ "realized_eur": 0.0,
+ "fx_eurusd": 1.1188,
+ "last_data_ok": "2026-10-13 21:44:14Z",
+ "cycles": 117,
+ "fx_date": "2026-10-13",
+ "last_cycle": "2026-10-13 21:44:14Z",
+ "last_status": "OK",
+ "last_problems": [],
+ "last_signals": {
+  "BTC": "bar 2026-10-13 20:00:00Z close 83,270.0: no entry (bar already processed)",
+  "ETH": "bar 2026-10-13 20:00:00Z close 2,507.8: no entry (bar already processed)",
+  "SOL": "bar 2026-10-13 20:00:00Z close 107.520: no entry (bar already processed)",
+  "AVAX": "bar 2026-10-13 20:00:00Z close 10.263: no entry (bar already processed)",
+  "SUI": "bar 2026-10-13 20:00:00Z close 1.0533: no entry (bar already processed)"
+ },
+ "last_actions": [],
+ "equity_eur": 200.0,
+ "upnl_eur": 0,
+ "risk": {
+  "dd": 0.0,
+  "daily_loss": 0.0,
+  "blocks": [
+   "session Beenden \u2013 offene Positionen werden verwaltet"
+  ]
+ },
+ "market": {
+  "BTC": {
+   "mid": 83442.5,
+   "spread_bps": 0.11984300566258202,
+   "funding_1h": 1.25e-05,
+   "oi": 38433.65224,
+   "dayVlm": 3090594922.9124546
+  },
+  "ETH": {
+   "mid": 2510.8500000000004,
+   "spread_bps": 0.3982715016823348,
+   "funding_1h": 1.25e-05,
+   "oi": 1068349.2219999996,
+   "dayVlm": 1529922642.2682803
+  },
+  "SOL": {
+   "mid": 107.095,
+   "spread_bps": 0.9337504085149545,
+   "funding_1h": 1.25e-05,
+   "oi": 5851281.44,
+   "dayVlm": 427736970.5362999
+  },
+  "AVAX": {
+   "mid": 10.294,
+   "spread_bps": 1.942879347193188,
+   "funding_1h": 8.6996e-06,
+   "oi": 2434375.0599999996,
+   "dayVlm": 13213783.254992003
+  },
+  "SUI": {
+   "mid": 1.0521500000000001,
+   "spread_bps": 0.9504348239318441,
+   "funding_1h": 1.22905e-05,
+   "oi": 64249363.79999999,
+   "dayVlm": 26101377.225020006
+  }
+ }
+}

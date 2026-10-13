@@ -1,0 +1,76 @@
+{
+ "id": "20261013-194323",
+ "capital_eur": 200.0,
+ "minutes": 120.0,
+ "strategy": "trend-4h-v1",
+ "strategy_role": "ACTIVE (validated OOS, weak)",
+ "strategy_tf": "4h",
+ "status": "ended",
+ "started": "2026-10-13 19:43:23Z",
+ "started_ts": 1791920603.818676,
+ "ends_at": "2026-10-13 21:43:23Z",
+ "ends_ts": 1791927803.818676,
+ "loops": 117,
+ "errors": 0,
+ "resumes": 3,
+ "publish": false,
+ "publish_every_s": 300,
+ "host": "github-actions",
+ "limits": {
+  "risk_per_trade": 0.01,
+  "daily_loss_stop": 0.03,
+  "max_drawdown_halt": 0.1,
+  "max_positions": 2,
+  "max_leverage": 3,
+  "min_notional_usd": 10
+ },
+ "pid": 2506,
+ "last_loop": "2026-10-13 21:44:14Z",
+ "heartbeat_ts": 1791927854.274956,
+ "status_text": "Beendet",
+ "stop_reason": "timeout",
+ "stop_requested": "2026-10-13 21:44:14Z",
+ "ended": "2026-10-13 21:44:19Z",
+ "report": {
+  "start_capital_eur": 200.0,
+  "end_capital_eur": 200.0,
+  "net_pnl_eur": 0.0,
+  "return_pct": 0.0,
+  "trades": 0,
+  "wins": 0,
+  "gross_pnl_eur": 0,
+  "fees_eur": 0.0,
+  "funding_eur": 0.0,
+  "planned_minutes": 120.0,
+  "actual_minutes": 120.9,
+  "started": "2026-10-13 19:43:23Z",
+  "ended": "2026-10-13 21:44:19Z",
+  "stop_reason": "timeout",
+  "loops": 117,
+  "market_evaluations": 585,
+  "rejected_or_no_entry": 10,
+  "engine_errors": 0,
+  "strategy": "trend-4h-v1",
+  "simulated": true
+ },
+ "ended_ts": 1791927859.0,
+ "heartbeat": "2026-10-13 21:44:14Z",
+ "jobs": [
+  {
+   "run_id": "38457048951",
+   "host": "github-actions"
+  },
+  {
+   "run_id": "38459907300",
+   "host": "github-actions"
+  },
+  {
+   "run_id": "38460759614",
+   "host": "github-actions"
+  },
+  {
+   "run_id": "38461036522",
+   "host": "github-actions"
+  }
+ ]
+}

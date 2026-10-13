@@ -22,7 +22,7 @@ def pstats(pf, cfg):
     for _, v in eq: peak = max(peak, v); mdd = max(mdd, 1 - v / peak)
     w = [t for t in tr if t["pnl_eur"] > 0]; gl = -sum(t["pnl_eur"] for t in tr if t["pnl_eur"] <= 0)
     logs = con.execute("select ts, status, msg from exec_log order by rowid desc limit 60").fetchall()
-    n_runs, n_ev, last_ev, rejected = 0, 0, None, []
+    n_runs, n_ev, last_ev, rejected, skips = 0, 0, None, [], []
     for ts, _, msg in con.execute("select ts, status, msg from exec_log order by rowid"):
         m = json.loads(msg); n_runs += 1; n_ev += len(m["signals"]); last_ev = ts
         for c, s in m["signals"].items():
@@ -33,6 +33,8 @@ def pstats(pf, cfg):
             elif "entry" in s: rejected.append(dict(ts=ts, coin=c, kind="ACCEPTED", reason="valid signal, risk checks passed", text=s))
         for a in m["actions"]:
             if a.startswith("SKIPPED"): rejected.append(dict(ts=ts, coin=a.split()[1].strip(":"), kind="rejected: skipped", reason=a, text=a))
+            if a.startswith("SKIPPED") and "Hyperliquid min" in a:
+                mm = re.search(r"\$([\d.]+) <", a); skips.append(dict(ts=ts, coin=a.split()[1].strip(":"), side="", size_usd=float(mm.group(1)) if mm else None, min_usd=10.0))
     s = pf["strat"]
     pos = [dict(coin=k, side="LONG" if p["side"] > 0 else "SHORT", entry=p["entry"], mark=p.get("mark"), stop=p["stop"], liq=p["liq"], qty=p["qty"],
                 notional_usd=round(p["notional_usd"], 2), lev=p["lev"], upnl_eur=round(p.get("upnl_eur", 0), 4), fees_eur=round(p["fees_eur"], 4),
@@ -48,7 +50,7 @@ def pstats(pf, cfg):
                 halted=st["halted"], halt_reason=st["halt_reason"], status=st["last_status"], last_cycle=st["last_cycle"], last_data_ok=st["last_data_ok"],
                 risk=st["risk"], problems=st["last_problems"], signals=st["last_signals"], actions=st["last_actions"],
                 positions=pos, trade_history=tr, evals=dict(cycles=n_runs, market_evaluations=n_ev, last=last_ev), rejected=rejected[::-1][:150], equity_curve=[[t, round(v, 4)] for t, v in eq[-1000:]], _logs=logs,
-                phase=st.get("phase"), phase_action=st.get("phase_action"), min_order_skips=st.get("min_order_skips", [])[:30], min_order_skips_total=st.get("min_order_skips_total", 0),
+                phase=st.get("phase"), phase_action=st.get("phase_action"), min_order_skips=skips[::-1][:30], min_order_skips_total=len(skips),
                 created=st.get("created"), fx_eurusd=st.get("fx_eurusd"), peak_equity_eur=st.get("peak_equity_eur"), day_start_equity_eur=st.get("day_start_equity_eur"))
 def unsci(t):
     def r(m):

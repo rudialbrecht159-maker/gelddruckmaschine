@@ -9,3 +9,4 @@ bin/
 .store_path
 screens/
 store/sessions/session.lock
+public/index.html

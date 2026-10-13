@@ -18,7 +18,7 @@ def main():
     out = dict(simulated=True, exported=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%SZ"), portfolios=ports,
                run_meta={k: rm.get(k) for k in ("last_run", "finished", "trigger", "status", "errors")}, hf={k: hf.get(k) for k in ("ts", "loops", "status", "strategy", "errors")})
     g = lambda *a: subprocess.run(["git", "-C", REPO, *a], capture_output=True, text=True, timeout=90)
-    g("fetch", "-q", "origin", "main"); g("merge", "-q", "--no-edit", "-X", "theirs", "origin/main")   # get latest sessions first
+    if not os.environ.get("GDM_NO_PUSH"): g("fetch", "-q", "origin", "main"); g("merge", "-q", "--no-edit", "-X", "theirs", "origin/main")   # latest sessions first
     os.makedirs(os.path.join(REPO, "store", "box"), exist_ok=True)
     json.dump(out, open(os.path.join(REPO, "store", "box", "portfolios.json"), "w"), separators=(",", ":"))
     try: cand = dict(tf="4h", fetched=None, coins={k: v[-150:] for k, v in json.load(open("state/candles_4h.json")).items() if not k.startswith("_")})
@@ -28,6 +28,7 @@ def main():
     if r.returncode: print("box_feed: build failed", r.stderr[-300:]); return 1
     shutil.copyfile(os.path.join(REPO, "public", "data.json"), "public/data.json")    # Pages copy = identical export
     if os.path.exists(os.path.join(REPO, "web", "index.html")): shutil.copyfile(os.path.join(REPO, "web", "index.html"), "public/index.html")
+    if os.environ.get("GDM_NO_PUSH"): print("box_feed: built (no push)"); return 0
     s = subprocess.run(["bash", os.path.join(REPO, "sync.sh"), "box hourly portfolios (SIMULATED)"], capture_output=True, text=True, timeout=150)
     print("box_feed:", "pushed" if s.returncode == 0 else "push failed", len(ports), "portfolios"); return 0
 
