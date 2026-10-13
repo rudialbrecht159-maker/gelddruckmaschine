@@ -5,7 +5,7 @@
  "strategy": "funding-fade-4h-x1",
  "strategy_role": "BEHALTEN \u2013 experimentell (niedrige\u2013mittlere Zuversicht)",
  "strategy_tf": "4h",
- "status": "running",
+ "status": "stopping",
  "started": "2026-10-13 21:46:35Z",
  "started_ts": 1791927995.5660436,
  "ends_at": "2026-10-13 22:01:35Z",
@@ -27,7 +27,9 @@
   "2026-10-13 21:46:35Z START capital=\u20ac200.0 minutes=15.0 strategy=funding-fade-4h-x1",
   "2026-10-13 21:46:35Z RUN job=38473066803 status=running resume=False",
   "2026-10-13 21:46:55Z ACTIONS ['OPENED BTC LONG 0.000761521 @ 83459 stop 80645.9 lev 0.28x']",
-  "2026-10-13 21:49:58Z RUN job=38473412319 status=running resume=True"
+  "2026-10-13 21:49:58Z RUN job=38473412319 status=running resume=True",
+  "2026-10-13 21:50:54Z CONTROL stop acknowledged 4.5 s after dispatch (workflow_dispatch)",
+  "2026-10-13 21:50:54Z STATE -> stopping (user stop)"
  ],
  "jobs": [
   {
@@ -41,14 +43,25 @@
    "started": "2026-10-13 21:49:58Z"
   }
  ],
- "heartbeat": "2026-10-13 21:49:58Z",
- "heartbeat_ts": 1791928198.700711,
- "status_text": "L\u00e4uft \u2013 Analyse aktiv",
+ "heartbeat": "2026-10-13 21:50:53Z",
+ "heartbeat_ts": 1791928253.5079515,
+ "status_text": "Beenden \u2013 offene Positionen werden verwaltet",
  "control_api": {
-  "calls": 1,
+  "calls": 7,
   "errors": 0,
   "poll_s": 5
  },
  "last_loop": "2026-10-13 21:49:59Z",
- "last_data": "2026-10-13 21:50:20Z"
+ "last_data": "2026-10-13 21:50:20Z",
+ "stop_ack": {
+  "action": "stop",
+  "acked": "2026-10-13 21:50:53Z",
+  "latency_s": 4.5,
+  "source": "workflow_dispatch",
+  "run_id": 38473610136,
+  "dispatched": "2026-10-13 21:50:49Z",
+  "url": "https://github.com/rudialbrecht159-maker/gelddruckmaschine/actions/runs/38473610136"
+ },
+ "stop_reason": "user stop",
+ "stop_requested": "2026-10-13 21:50:53Z"
 }

@@ -2,3 +2,5 @@
 2026-10-13 21:46:35Z RUN job=38473066803 status=running resume=False
 2026-10-13 21:46:55Z ACTIONS ['OPENED BTC LONG 0.000761521 @ 83459 stop 80645.9 lev 0.28x']
 2026-10-13 21:49:58Z RUN job=38473412319 status=running resume=True
+2026-10-13 21:50:54Z CONTROL stop acknowledged 4.5 s after dispatch (workflow_dispatch)
+2026-10-13 21:50:54Z STATE -> stopping (user stop)
