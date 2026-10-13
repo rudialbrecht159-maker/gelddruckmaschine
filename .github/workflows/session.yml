@@ -43,7 +43,8 @@ jobs:
         with: {python-version: "3.12"}
       - run: pip install -q pandas numpy requests
       - name: connectivity check (Hyperliquid public info API)
-        run: curl -s -m 15 -X POST https://api.hyperliquid.xyz/info -H 'Content-Type: application/json' -d '{"type":"allMids"}' | python -c "import json,sys;d=json.load(sys.stdin);print('Hyperliquid reachable, BTC mid',d['BTC'])"
+        run: |
+          curl -s -m 15 -X POST https://api.hyperliquid.xyz/info -H 'Content-Type: application/json' -d '{"type":"allMids"}' | python -c "import json,sys;d=json.load(sys.stdin);print('Hyperliquid reachable, BTC mid',d['BTC'])"
       - name: run session (60 s loop), state committed every 2 min
         run: |
           set -u
