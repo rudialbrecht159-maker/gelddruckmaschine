@@ -2,3 +2,11 @@
 2026-10-13 19:14:29Z OK trigger='non-interactive (likely hourly routine)' equity=99.9656 actions=[] problems=[]
 2026-10-13 19:15:30Z OK trigger='non-interactive (likely hourly routine)' equity=99.9656 actions=[] problems=[]
 2026-10-13 19:16:29Z OK trigger='non-interactive (likely hourly routine)' equity=99.9695 actions=[] problems=[]
+2026-10-13 19:17:51Z ERROR Traceback (most recent call last):
+  File "/home/runner/work/gelddruckmaschine/gelddruckmaschine/session.py", line 98, in run
+    cycle.main(pf)
+  File "/home/runner/work/gelddruckmaschine/gelddruckmaschine/cycle.py", line 167, in main
+    con.execute("insert into equity values(?,?,?,?)", (iso(t0), equity, st["balance_eur"], upnl))
+sqlite3.OperationalError: attempt to write a readonly database
+
+2026-10-13 19:18:29Z OK trigger='non-interactive (likely hourly routine)' equity=99.9653 actions=[] problems=[]
