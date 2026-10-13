@@ -15,7 +15,7 @@
    "liq": 2094.820823513152,
    "margin_eur": 56.80709135165233,
    "open_ts": 1791927996236,
-   "checked_ts": 1791928056116,
+   "checked_ts": 1791928115952,
    "fund_ts": 1791927996236,
    "fees_eur": 0.02556319110824355,
    "funding_eur": 0.0,
@@ -30,8 +30,8 @@
     "spread_bps": 0.11985593316833167,
     "depth10_usd": 3396187.39445
    },
-   "mark": 83444.5,
-   "upnl_eur": -0.009890102925703846
+   "mark": 83478.5,
+   "upnl_eur": 0.013252283240630727
   }
  },
  "last_bar_processed": {
@@ -47,10 +47,10 @@
  "funding_eur": 0.0,
  "realized_eur": 0.0,
  "fx_eurusd": 1.1188,
- "last_data_ok": "2026-10-13 21:47:36Z",
- "cycles": 2,
+ "last_data_ok": "2026-10-13 21:48:35Z",
+ "cycles": 3,
  "fx_date": "2026-10-13",
- "last_cycle": "2026-10-13 21:47:36Z",
+ "last_cycle": "2026-10-13 21:48:35Z",
  "last_status": "OK",
  "last_problems": [],
  "last_signals": {
@@ -61,53 +61,53 @@
   "SUI": "bar 2026-10-13 20:00:00Z close 1.0533: no entry [3d funding 9.35e-06 (p10 4.24e-06 / p90 1.99e-05), trend up] (bar already processed)"
  },
  "last_actions": [],
- "equity_eur": 199.96454670596606,
- "upnl_eur": -0.009890102925703846,
+ "equity_eur": 199.9876890921324,
+ "upnl_eur": 0.013252283240630727,
  "risk": {
-  "dd": 0.00017726647016969022,
-  "daily_loss": 0.00017726647016969022,
+  "dd": 6.155453933798238e-05,
+  "daily_loss": 6.155453933798238e-05,
   "blocks": []
  },
  "market": {
   "BTC": {
-   "mid": 83444.5,
-   "spread_bps": 0.11984013326222819,
+   "mid": 83478.5,
+   "spread_bps": 0.11979132351443784,
    "funding_1h": 1.25e-05,
-   "oi": 38466.34174,
-   "dayVlm": 3092563325.865861
+   "oi": 38491.28532,
+   "dayVlm": 3094663263.1179194
   },
   "ETH": {
-   "mid": 2510.95,
-   "spread_bps": 0.3982556402951435,
+   "mid": 2511.75,
+   "spread_bps": 0.3981287946665225,
    "funding_1h": 1.25e-05,
-   "oi": 1068412.5536000002,
-   "dayVlm": 1530145959.2442973
+   "oi": 1068356.3198000002,
+   "dayVlm": 1530433785.3077471
   },
   "SOL": {
-   "mid": 107.125,
-   "spread_bps": 0.9334889148182874,
+   "mid": 107.195,
+   "spread_bps": 0.9328793320588755,
    "funding_1h": 1.25e-05,
-   "oi": 5851397.78,
-   "dayVlm": 427767667.75789994
+   "oi": 5851236.94,
+   "dayVlm": 427787148.82229984
   },
   "AVAX": {
-   "mid": 10.3015,
-   "spread_bps": 0.970732417608548,
-   "funding_1h": 9.6117e-06,
-   "oi": 2434599.54,
-   "dayVlm": 13219159.150902003
+   "mid": 10.311499999999999,
+   "spread_bps": 0.9697910100367996,
+   "funding_1h": 9.7042e-06,
+   "oi": 2434599.7,
+   "dayVlm": 13219248.185352003
   },
   "SUI": {
-   "mid": 1.0526499999999999,
-   "spread_bps": 0.949983375290828,
-   "funding_1h": 1.22741e-05,
-   "oi": 64249757.4,
-   "dayVlm": 26101809.772050012
+   "mid": 1.0530499999999998,
+   "spread_bps": 0.9496225250461897,
+   "funding_1h": 1.23449e-05,
+   "oi": 64249777.0,
+   "dayVlm": 26101820.083610013
   }
  },
  "phase": {
   "start": "2026-10-13 21:46 UTC",
-  "evaluated_at": "2026-10-13 21:48 UTC",
+  "evaluated_at": "2026-10-13 21:49 UTC",
   "start_equity": 200.0,
   "criteria": {
    "net_positive": "Netto > 0 nach Geb\u00fchren",
@@ -132,20 +132,20 @@
      "min_trades",
      "robust_net"
     ],
-    "net_eur": -0.04,
-    "net_pct": -0.02,
+    "net_eur": -0.01,
+    "net_pct": -0.01,
     "trades": 0,
     "trades_in_phase": 0,
     "maxdd_pct": 0.02,
     "best_trade_eur": 0.0,
-    "net_minus_best_eur": -0.04
+    "net_minus_best_eur": -0.01
    }
   ],
   "action": "continue",
   "current_phase": "P1",
-  "recommendation": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.04 \u20ac, 0 Trades, MaxDD 0.02 %).",
+  "recommendation": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.01 \u20ac, 0 Trades, MaxDD 0.02 %).",
   "label_de": "WEITER"
  },
  "phase_action": "continue",
- "phase_note": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.04 \u20ac, 0 Trades, MaxDD 0.02 %)."
+ "phase_note": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.01 \u20ac, 0 Trades, MaxDD 0.02 %)."
 }
