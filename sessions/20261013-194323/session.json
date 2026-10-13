@@ -1,0 +1,31 @@
+{
+ "id": "20261013-194323",
+ "capital_eur": 200.0,
+ "minutes": 120.0,
+ "strategy": "trend-4h-v1",
+ "strategy_role": "ACTIVE (validated OOS, weak)",
+ "strategy_tf": "4h",
+ "status": "running",
+ "started": "2026-10-13 19:43:23Z",
+ "started_ts": 1791920603.818676,
+ "ends_at": "2026-10-13 21:43:23Z",
+ "ends_ts": 1791927803.818676,
+ "loops": 2,
+ "errors": 0,
+ "resumes": 0,
+ "publish": false,
+ "publish_every_s": 300,
+ "host": "github-actions",
+ "limits": {
+  "risk_per_trade": 0.01,
+  "daily_loss_stop": 0.03,
+  "max_drawdown_halt": 0.1,
+  "max_positions": 2,
+  "max_leverage": 3,
+  "min_notional_usd": 10
+ },
+ "pid": 2359,
+ "last_loop": "2026-10-13 19:44:23Z",
+ "heartbeat_ts": 1791920663.8195188,
+ "status_text": "L\u00e4uft \u2013 Analyse aktiv"
+}

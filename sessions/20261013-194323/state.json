@@ -1,0 +1,79 @@
+{
+ "created": "2026-10-13 19:43:24Z",
+ "balance_eur": 200.0,
+ "peak_equity_eur": 200.0,
+ "day": "2026-10-13",
+ "day_start_equity_eur": 200.0,
+ "positions": {},
+ "last_bar_processed": {
+  "BTC": 1791892800000,
+  "ETH": 1791892800000,
+  "SOL": 1791892800000,
+  "AVAX": 1791892800000,
+  "SUI": 1791892800000
+ },
+ "halted": false,
+ "halt_reason": null,
+ "fees_eur": 0.0,
+ "funding_eur": 0.0,
+ "realized_eur": 0.0,
+ "fx_eurusd": 1.1188,
+ "last_data_ok": "2026-10-13 19:44:24Z",
+ "cycles": 2,
+ "fx_date": "2026-10-13",
+ "last_cycle": "2026-10-13 19:44:24Z",
+ "last_status": "OK",
+ "last_problems": [],
+ "last_signals": {
+  "BTC": "bar 2026-10-13 16:00:00Z close 83,401.0: no entry (bar already processed)",
+  "ETH": "bar 2026-10-13 16:00:00Z close 2,515.2: no entry (bar already processed)",
+  "SOL": "bar 2026-10-13 16:00:00Z close 107.330: no entry (bar already processed)",
+  "AVAX": "bar 2026-10-13 16:00:00Z close 10.232: no entry (bar already processed)",
+  "SUI": "bar 2026-10-13 16:00:00Z close 1.0387: no entry (bar already processed)"
+ },
+ "last_actions": [],
+ "equity_eur": 200.0,
+ "upnl_eur": 0,
+ "risk": {
+  "dd": 0.0,
+  "daily_loss": 0.0,
+  "blocks": []
+ },
+ "market": {
+  "BTC": {
+   "mid": 83164.5,
+   "spread_bps": 0.12024361356107474,
+   "funding_1h": 1.25e-05,
+   "oi": 38288.8264,
+   "dayVlm": 3223989764.911043
+  },
+  "ETH": {
+   "mid": 2504.75,
+   "spread_bps": 0.39924144126305544,
+   "funding_1h": 1.15562e-05,
+   "oi": 1077441.9758,
+   "dayVlm": 1606455442.2597797
+  },
+  "SOL": {
+   "mid": 107.535,
+   "spread_bps": 0.9299297903013081,
+   "funding_1h": 1.25e-05,
+   "oi": 5852949.119999998,
+   "dayVlm": 436085153.13599986
+  },
+  "AVAX": {
+   "mid": 10.233,
+   "spread_bps": 1.9544610573640846,
+   "funding_1h": 9.411e-07,
+   "oi": 2441103.78,
+   "dayVlm": 13494295.424972003
+  },
+  "SUI": {
+   "mid": 1.04995,
+   "spread_bps": 0.9524263060144673,
+   "funding_1h": 1.14822e-05,
+   "oi": 64465242.6,
+   "dayVlm": 27473112.691200014
+  }
+ }
+}
