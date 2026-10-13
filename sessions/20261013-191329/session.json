@@ -1,0 +1,31 @@
+{
+ "id": "20261013-191329",
+ "capital_eur": 100.0,
+ "minutes": 10.0,
+ "strategy": "funding-fade-4h-x1",
+ "strategy_role": "EXPERIMENTAL",
+ "strategy_tf": "4h",
+ "status": "running",
+ "started": "2026-10-13 19:13:29Z",
+ "started_ts": 1791918809.6775315,
+ "ends_at": "2026-10-13 19:23:29Z",
+ "ends_ts": 1791919409.6775315,
+ "loops": 2,
+ "errors": 0,
+ "resumes": 0,
+ "publish": false,
+ "publish_every_s": 300,
+ "host": "github-actions",
+ "limits": {
+  "risk_per_trade": 0.01,
+  "daily_loss_stop": 0.03,
+  "max_drawdown_halt": 0.1,
+  "max_positions": 2,
+  "max_leverage": 3,
+  "min_notional_usd": 10
+ },
+ "pid": 2370,
+ "last_loop": "2026-10-13 19:14:29Z",
+ "heartbeat_ts": 1791918869.6782043,
+ "status_text": "L\u00e4uft \u2013 Analyse aktiv"
+}
