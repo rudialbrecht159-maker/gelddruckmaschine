@@ -1,0 +1,153 @@
+{
+ "created": "2026-10-13 21:46:36Z",
+ "balance_eur": 199.97443680889177,
+ "peak_equity_eur": 200.0,
+ "day": "2026-10-13",
+ "day_start_equity_eur": 200.0,
+ "positions": {
+  "BTC": {
+   "side": 1,
+   "entry": 83459.0302,
+   "stop": 80645.88734285714,
+   "qty": 0.0007615206365557389,
+   "notional_usd": 63.55577380422863,
+   "lev": 0.284,
+   "liq": 2094.820823513152,
+   "margin_eur": 56.80709135165233,
+   "open_ts": 1791927996236,
+   "checked_ts": 1791927996236,
+   "fund_ts": 1791927996236,
+   "fees_eur": 0.02556319110824355,
+   "funding_eur": 0.0,
+   "strategy": "funding-fade-4h-x1",
+   "tp": null,
+   "risk_eur": 2.0,
+   "book_at_entry": {
+    "time": 1791927996918,
+    "bid": 83433.0,
+    "ask": 83434.0,
+    "mid": 83433.5,
+    "spread_bps": 0.11985593316833167,
+    "depth10_usd": 3396187.39445
+   },
+   "mark": 83433.5,
+   "upnl_eur": -0.017377345508929738
+  }
+ },
+ "last_bar_processed": {
+  "BTC": 1791907200000,
+  "ETH": 1791907200000,
+  "SOL": 1791907200000,
+  "AVAX": 1791907200000,
+  "SUI": 1791907200000
+ },
+ "halted": false,
+ "halt_reason": null,
+ "fees_eur": 0.02556319110824355,
+ "funding_eur": 0.0,
+ "realized_eur": 0.0,
+ "fx_eurusd": 1.1188,
+ "last_data_ok": "2026-10-13 21:46:36Z",
+ "cycles": 1,
+ "fx_date": "2026-10-13",
+ "last_cycle": "2026-10-13 21:46:36Z",
+ "last_status": "OK",
+ "last_problems": [],
+ "last_signals": {
+  "BTC": "bar 2026-10-13 20:00:00Z close 83,270.0: LONG entry [3d funding 3.54e-06 (p10 4.63e-06 / p90 1.25e-05), trend up]",
+  "ETH": "bar 2026-10-13 20:00:00Z close 2,507.8: no entry [3d funding 1.78e-06 (p10 5.93e-06 / p90 1.25e-05), trend down]",
+  "SOL": "bar 2026-10-13 20:00:00Z close 107.520: no entry [3d funding 9.42e-06 (p10 1.86e-06 / p90 1.25e-05), trend up]",
+  "AVAX": "bar 2026-10-13 20:00:00Z close 10.263: no entry [3d funding 5.02e-06 (p10 -1.50e-06 / p90 1.43e-05), trend up]",
+  "SUI": "bar 2026-10-13 20:00:00Z close 1.0533: no entry [3d funding 9.35e-06 (p10 4.24e-06 / p90 1.99e-05), trend up]"
+ },
+ "last_actions": [
+  "OPENED BTC LONG 0.000761521 @ 83459 stop 80645.9 lev 0.28x"
+ ],
+ "equity_eur": 199.95705946338285,
+ "upnl_eur": -0.017377345508929738,
+ "risk": {
+  "dd": 0.0,
+  "daily_loss": 0.0,
+  "blocks": []
+ },
+ "market": {
+  "BTC": {
+   "mid": 83433.5,
+   "spread_bps": 0.11985593316833167,
+   "funding_1h": 1.25e-05,
+   "oi": 38435.0139,
+   "dayVlm": 3090778021.69436
+  },
+  "ETH": {
+   "mid": 2510.55,
+   "spread_bps": 0.3983190934253811,
+   "funding_1h": 1.25e-05,
+   "oi": 1068423.3109999998,
+   "dayVlm": 1530108714.2194474
+  },
+  "SOL": {
+   "mid": 107.125,
+   "spread_bps": 0.9334889148182874,
+   "funding_1h": 1.25e-05,
+   "oi": 5851261.52,
+   "dayVlm": 427748906.2711
+  },
+  "AVAX": {
+   "mid": 10.3005,
+   "spread_bps": 0.9708266588995154,
+   "funding_1h": 9.3339e-06,
+   "oi": 2434375.06,
+   "dayVlm": 13214476.762272002
+  },
+  "SUI": {
+   "mid": 1.0526499999999999,
+   "spread_bps": 0.949983375290828,
+   "funding_1h": 1.22745e-05,
+   "oi": 64249777.0,
+   "dayVlm": 26101789.14893001
+  }
+ },
+ "phase": {
+  "start": "2026-10-13 21:46 UTC",
+  "evaluated_at": "2026-10-13 21:46 UTC",
+  "start_equity": 200.0,
+  "criteria": {
+   "net_positive": "Netto > 0 nach Geb\u00fchren",
+   "min_trades": ">= 30 Trades",
+   "max_dd": "MaxDD < 10%",
+   "robust_net": "Netto minus bester Trade > 0"
+  },
+  "phases": [
+   {
+    "phase": "P1",
+    "window": "2026-10-13 21:46 UTC \u2192 2026-10-20 21:46 UTC",
+    "status": "running",
+    "action": "continue",
+    "checks": {
+     "net_positive": false,
+     "min_trades": false,
+     "max_dd": true,
+     "robust_net": false
+    },
+    "failed": [
+     "net_positive",
+     "min_trades",
+     "robust_net"
+    ],
+    "net_eur": -0.04,
+    "net_pct": -0.02,
+    "trades": 0,
+    "trades_in_phase": 0,
+    "maxdd_pct": 0.02,
+    "best_trade_eur": 0.0,
+    "net_minus_best_eur": -0.04
+   }
+  ],
+  "action": "continue",
+  "current_phase": "P1",
+  "recommendation": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.04 \u20ac, 0 Trades, MaxDD 0.02 %).",
+  "label_de": "WEITER"
+ },
+ "phase_action": "continue",
+ "phase_note": "WEITER: aktuelle Phase P1 l\u00e4uft (Zwischenstand -0.04 \u20ac, 0 Trades, MaxDD 0.02 %)."
+}

@@ -1,0 +1,3 @@
+2026-10-13 21:46:35Z START capital=€200.0 minutes=15.0 strategy=funding-fade-4h-x1
+2026-10-13 21:46:35Z RUN job=38473066803 status=running resume=False
+2026-10-13 21:46:55Z ACTIONS ['OPENED BTC LONG 0.000761521 @ 83459 stop 80645.9 lev 0.28x']
