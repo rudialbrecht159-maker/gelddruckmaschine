@@ -20,7 +20,9 @@ jobs:
     steps:
       - name: confirm check
         if: inputs.action == 'close_all' && inputs.confirm != 'CLOSE ALL'
-        run: { echo "::error::close_all rejected: confirm input must be exactly 'CLOSE ALL'"; exit 1; }
+        run: |
+          echo "::error::close_all rejected: confirm input must be exactly 'CLOSE ALL'"
+          exit 1
       - uses: actions/checkout@v4
       - name: commit control file (running session polls it every loop)
         run: |
