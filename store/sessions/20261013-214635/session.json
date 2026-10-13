@@ -10,9 +10,9 @@
  "started_ts": 1791927995.5660436,
  "ends_at": "2026-10-13 22:01:35Z",
  "ends_ts": 1791928895.5660436,
- "loops": 3,
+ "loops": 4,
  "errors": 0,
- "resumes": 0,
+ "resumes": 1,
  "host": "github-actions",
  "alerts": [],
  "limits": {
@@ -26,23 +26,29 @@
  "log_tail": [
   "2026-10-13 21:46:35Z START capital=\u20ac200.0 minutes=15.0 strategy=funding-fade-4h-x1",
   "2026-10-13 21:46:35Z RUN job=38473066803 status=running resume=False",
-  "2026-10-13 21:46:55Z ACTIONS ['OPENED BTC LONG 0.000761521 @ 83459 stop 80645.9 lev 0.28x']"
+  "2026-10-13 21:46:55Z ACTIONS ['OPENED BTC LONG 0.000761521 @ 83459 stop 80645.9 lev 0.28x']",
+  "2026-10-13 21:49:58Z RUN job=38473412319 status=running resume=True"
  ],
  "jobs": [
   {
    "run_id": "38473066803",
    "host": "github-actions",
    "started": "2026-10-13 21:46:35Z"
+  },
+  {
+   "run_id": "38473412319",
+   "host": "github-actions",
+   "started": "2026-10-13 21:49:58Z"
   }
  ],
- "heartbeat": "2026-10-13 21:48:35Z",
- "heartbeat_ts": 1791928115.5667374,
+ "heartbeat": "2026-10-13 21:49:58Z",
+ "heartbeat_ts": 1791928198.700711,
  "status_text": "L\u00e4uft \u2013 Analyse aktiv",
  "control_api": {
-  "calls": 16,
+  "calls": 1,
   "errors": 0,
   "poll_s": 5
  },
- "last_loop": "2026-10-13 21:48:35Z",
- "last_data": "2026-10-13 21:49:00Z"
+ "last_loop": "2026-10-13 21:49:59Z",
+ "last_data": "2026-10-13 21:50:20Z"
 }
