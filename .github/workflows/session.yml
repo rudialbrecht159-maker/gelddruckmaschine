@@ -50,7 +50,7 @@ jobs:
           set -u
           M="${{ inputs.minutes }}"; python -c "import sys;m=float('$M');sys.exit(0 if 1<=m<=180 else 1)" || { echo "::error::minutes must be 1..180"; exit 1; }
           git config user.name "gelddruckmaschine-bot"; git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
-          sync() { git add -A sessions public 2>/dev/null; git commit -qm "session state $(date -u +%T) (SIMULATED)" || true; for i in 1 2 3; do git pull --rebase -q -X theirs && git push -q && break; sleep 3; done; }
+          sync() { git add -A sessions public 2>/dev/null; git commit -qm "session state $(date -u +%T) (SIMULATED)" || true; for i in 1 2 3; do git pull --no-rebase --no-edit -q && git push -q && break; sleep 3; done; }
           ( while sleep 120; do sync >/dev/null 2>&1; done ) & SYNC=$!
           CMD='git fetch -q origin main 2>/dev/null; git show origin/main:sessions/control.json 2>/dev/null || echo {}'
           if python session.py status | grep -q '"status": "\(running\|stopping\)"'; then echo "resuming unfinished session from committed state"; python session.py resume --control-cmd "$CMD" || true
@@ -60,4 +60,4 @@ jobs:
         if: always()
         run: |
           git add -A sessions public 2>/dev/null; git commit -qm "session final $(date -u +%T) (SIMULATED)" || true
-          for i in 1 2 3; do git pull --rebase -q -X theirs && git push -q && break; sleep 3; done
+          for i in 1 2 3; do git pull --no-rebase --no-edit -q && git push -q && break; sleep 3; done
