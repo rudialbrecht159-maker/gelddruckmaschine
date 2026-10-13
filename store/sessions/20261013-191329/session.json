@@ -53,5 +53,14 @@
   "engine_errors": 2,
   "strategy": "funding-fade-4h-x1",
   "simulated": true
- }
+ },
+ "ended_ts": 1791919368.0,
+ "heartbeat": "2026-10-13 19:22:29Z",
+ "jobs": [
+  {
+   "run_id": "38453100995",
+   "host": "github-actions",
+   "started": "2026-10-13 19:13:29Z"
+  }
+ ]
 }

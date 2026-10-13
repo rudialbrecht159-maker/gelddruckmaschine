@@ -43,7 +43,7 @@
     "vol_mult": 1.5
    },
    "history_bars": 3000,
-   "evidence": "TEST portfolio (research2/candidates.py, preregistered fixed params). Not validated for activation; observed independently with its own \u20ac50."
+   "evidence": "TEST portfolio (research2/candidates.py, preregistered fixed params). Not validated for activation; observed independently with its own €50."
   },
   {
    "name": "funding_fade_trend",
@@ -53,7 +53,7 @@
    "history_bars": 800,
    "params": {},
    "role": "EXPERIMENTAL",
-   "evidence": "EXPERIMENTAL \u2014 best backtest so far, hold-out failed, low-moderate confidence (research4 R3)."
+   "evidence": "EXPERIMENTAL — best backtest so far, hold-out failed, low-moderate confidence (research4 R3)."
   }
  ],
  "hf_strategy": {
@@ -67,6 +67,73 @@
   },
   "adapter": true,
   "history_bars": 400,
-  "evidence": "EXPERIMENTAL \u2014 backtest NEGATIVE (research3 H2 zrev5m: \u22126.7% net, PF 0.78, halted at 10% DD; gross +\u20ac0.44). Observation-only paper test, very low confidence. Runs every 60 s in hf_runner."
+  "evidence": "EXPERIMENTAL — backtest NEGATIVE (research3 H2 zrev5m: −6.7% net, PF 0.78, halted at 10% DD; gross +€0.44). Observation-only paper test, very low confidence. Runs every 60 s in hf_runner."
+ },
+ "leverage_cap": 3.0,
+ "leverage_hard_max": 5.0,
+ "session": {
+  "_doc": "Single config for Actions sessions. duration_min 0 = unbegrenzt (pauses at job budget unless chain_jobs). Dashboard settings panel generates these values.",
+  "capital_eur": 100.0,
+  "strategy": "funding-fade-4h-x1",
+  "duration_min": 60,
+  "presets_min": [
+   10,
+   15,
+   30,
+   60,
+   120,
+   180,
+   0
+  ],
+  "loop_s": 60,
+  "control_poll_s": 5,
+  "sync_every_s": 60,
+  "job_budget_min": 170,
+  "chain_jobs": false,
+  "max_chain": 3,
+  "strategies": [
+   "funding-fade-4h-x1",
+   "trend-4h-v1"
+  ]
+ },
+ "plugins": {
+  "_doc": "Strategy plug-in point for research5 (other worker). A module exposing STRATEGIES={version:{name,tf,params,fn,...}} and optionally a phases module exposing phase_reports(store_dir)->list.",
+  "strategy_modules": [
+   "research5.strategy_set"
+  ],
+  "phases_module": "research5.phases"
+ },
+ "strategy_verdicts": {
+  "_doc": "research5 verdicts (backtest_report.md / strategy_verdicts.md). Discarded strategies keep running hourly as-is (data kept) but are labeled VERWORFEN.",
+  "funding-fade-4h-x1": {
+   "code": "S5",
+   "verdict": "KEEP",
+   "label_de": "BEHALTEN – experimentell (niedrige–mittlere Zuversicht)",
+   "bt_key": "S5 funding-fade-4h-x1"
+  },
+  "trend-4h-v1": {
+   "code": "S1",
+   "verdict": "REWORK/OBSERVE",
+   "label_de": "BEOBACHTEN / ÜBERARBEITEN (fragil, <30 Trades)",
+   "bt_key": "S1 trend-4h-v1 (aktiv)"
+  },
+  "breakout-1h-v1": {
+   "code": "S2",
+   "verdict": "DISCARD",
+   "label_de": "VERWORFEN",
+   "bt_key": "S2 breakout-1h-v1 (Schatten)"
+  },
+  "test-breakout1h-filtered": {
+   "code": "S3",
+   "verdict": "DISCARD",
+   "label_de": "VERWORFEN",
+   "bt_key": "S3 test-breakout1h-filtered"
+  },
+  "test-hf-zscore-5m": {
+   "code": "S4",
+   "verdict": "DISCARD",
+   "label_de": "VERWORFEN",
+   "bt_key": "S4 test-hf-zscore-5m"
+  }
  }
 }

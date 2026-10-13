@@ -1,0 +1,20 @@
+# Entscheidungen Projekt 2.0 (dokumentiert)
+- **Ein Store = `store/` im Code-Repo (git-versioniert), ein Export = `public/data.json`.**
+  - Schreiber: der Actions-Session-Job (jede Minute + bei Ereignissen) und die stündliche Box (`box_feed.py`, aufgerufen aus dem bestehenden stündlichen Lauf, kein neuer Zeitplan).
+  - Beide bauen `data.json` mit derselben Funktion aus dem gesamten Store, so entsteht kein Widerspruch.
+  - Konflikte beim Merge löst `-X ours`; der nächste Build ist wieder vollständig.
+- **Sessions laufen nur noch in GitHub Actions.** Box-Sessions sind nicht mehr vorgesehen, weil die Box beim Leerlauf einfriert.
+- **STOP-Kanal = Workflow-Dispatch selbst.**
+  - Der `run-name` kodiert die Aktion. Die Engine liest `GET /actions/workflows/session.yml/runs` alle 5 s mit GITHUB_TOKEN (nur lesend, ETag, 304 schont das Kontingent). Das sind etwa 720 Aufrufe/h, unter dem Limit von 1000/h je Repo.
+  - Gemessen wird `ack − created_at` des Dispatch-Runs. Ehrlich: Das sind **5–10 s** (Polling-Raster 5 s plus GitHub-Verarbeitung). **Unter 5 s ist nicht garantiert.** Dazu kommt die Zeit, bis das Dashboard den bestätigten Stand sieht (Sync ≤ 60 s + Poll 75 s).
+- **Unbegrenzt:** Pausiert am Job-Budget. `chain` ist Opt-in, standardmäßig AUS (ToS-Risiko).
+- **Strategien (research5):**
+  - Für Sessions wählbar: `funding-fade-4h-x1` (S5, Standard, experimentell) und `trend-4h-v1` (S1, beobachten), getrennt und nicht kombiniert, weil die Kombination im Backtest schlechter war.
+  - S2, S3 und S4 sind verworfen: Sie laufen stündlich unverändert weiter, Daten bleiben, im Dashboard als VERWORFEN markiert.
+- **Phasen (research5/phases.py):**
+  - Rudis Bestehensregeln bleiben unverändert.
+  - Strategien mit niedriger Frequenz, die 30 Trades nicht erreichen, erscheinen als **UNENTSCHIEDEN/VERLÄNGERN**, nie als bestanden.
+  - Aktion `pause` sperrt neue Einstiege des Portfolios automatisch und erzeugt einen Alarm. Bestehende Positionen laufen mit Stop weiter.
+- **Hebel:** `leverage_cap` 3 (konfigurierbar), harte Obergrenze 5 im Code. Die Risiko-Limits sind unverändert.
+- **Exits:** Stop (gap-aware über 1h-Kerzen plus Mid), TP nur wenn die Strategie eines definiert, Signal-Exit nur auf geschlossenen Kerzen, Notfall-Close. Keine Exits auf Rauschen.
+- **Dashboard-Hosting:** bleibt GitHub Pages. Daten kommen über die Contents-API vom Code-Repo (Fallback raw, dann Pages-Kopie). Abruf alle 75 s, das bleibt unter 60 nicht authentifizierten API-Aufrufen pro Stunde und IP.

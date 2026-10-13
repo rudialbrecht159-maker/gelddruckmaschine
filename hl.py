@@ -4,15 +4,20 @@ URL = "https://api.hyperliquid.xyz/info"
 COINS = ["BTC", "ETH", "SOL", "AVAX", "SUI"]
 IV_MS = {"1m": 60_000, "5m": 300_000, "15m": 900_000, "1h": 3600_000, "4h": 14400_000}
 
-def post(body, retries=3):
+import random
+LAST_OK = {"ts": None}   # wall-clock of the last successful API response (health / last-data timestamp)
+def post(body, retries=5):
+    """Reconnect/retry with exponential backoff + jitter (1,2,4,8 s ...); raises after the last try."""
     for i in range(retries):
         try:
             r = requests.post(URL, json=body, timeout=20)
+            if r.status_code == 429: raise RuntimeError("rate limited (429)")
             r.raise_for_status()
+            LAST_OK["ts"] = time.time()
             return r.json()
         except Exception:
             if i == retries - 1: raise
-            time.sleep(2 * (i + 1))
+            time.sleep(min(30, 2 ** i) * (0.75 + random.random() / 2))
 
 def candles(coin, interval, start_ms, end_ms=None):
     end_ms = end_ms or int(time.time() * 1000)

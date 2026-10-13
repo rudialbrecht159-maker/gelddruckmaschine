@@ -99,8 +99,12 @@ def main(pf=None):
             if ((lo if s > 0 else hi) - p["stop"]) * s <= 0:
                 gap = (op - p["stop"]) * s <= 0 and k["t"] >= p["checked_ts"]
                 exit_px, why = (op, "stop_gap") if gap else (p["stop"], "stop"); break
+        if exit_px is None and p.get("tp"):   # take-profit only where the strategy defines a target
+            for k in [x for x in d["h1"] if x["t"] + 3600_000 > p["checked_ts"]]:
+                if ((float(k["h"]) if s > 0 else float(k["l"])) - p["tp"]) * s >= 0: exit_px, why = p["tp"], "tp"; break
         p["checked_ts"] = t0
         if exit_px is None and (d["book"]["mid"] - p["stop"]) * s <= 0: exit_px, why = d["book"]["mid"], "stop"
+        if exit_px is None and p.get("tp") and (d["book"]["mid"] - p["tp"]) * s >= 0: exit_px, why = d["book"]["mid"], "tp"
         if exit_px is None and pf.get("force_close"): exit_px, why = d["book"]["mid"], "emergency_close"
         if exit_px is None and d["ok"] and len(d["df"]):
             sig = (fn(d["df"], coin=c, position_side=s, **strat["params"]) if strat.get("adapter") else fn(d["df"], **strat["params"])).iloc[-1]
@@ -119,6 +123,7 @@ def main(pf=None):
     block = []
     if st["halted"]: block.append("HALTED: " + st["halt_reason"])
     if pf.get("no_entries"): block.append(pf.get("no_entries_reason", "no new entries"))
+    if st.get("phase_action") == "pause": block.append(f"PHASE PAUSE: {st.get('phase_note', 'phase failed')}")
     if dloss >= CFG["daily_loss_stop"]: block.append(f"daily loss {dloss:.1%} >= 3%")
     if not strat: block.append("no validated strategy")
     # ---------- 4. entries ----------
@@ -140,20 +145,29 @@ def main(pf=None):
         bk = d["book"]; a = float(sig["atr"]) if strat.get("adapter") else float(sim_atr(df))
         entry = sim.fill_price(bk["ask"] if side > 0 else bk["bid"], side, c, spread_frac=0)
         stop = entry - side * (float(sig["stop_atr"]) if strat.get("adapter") else strat["params"]["stop_atr"]) * a
+        if not (np.isfinite(stop) and (entry - stop) * side > 0):   # every trade MUST have a valid stop-loss
+            signals[c] += " BLOCKED: invalid stop-loss"; log.append(f"SKIPPED {c}: invalid stop {stop}"); continue
+        tp = None
+        if "tp" in sig.index and pd.notna(sig["tp"]): tp = float(sig["tp"])
+        elif "tp_atr" in sig.index and pd.notna(sig["tp_atr"]): tp = entry + side * float(sig["tp_atr"]) * a
+        elif strat["params"].get("tp_atr"): tp = entry + side * float(strat["params"]["tp_atr"]) * a
+        if tp is not None and (tp - entry) * side <= 0: tp = None
         notional_eur = sim.size_position(equity, entry, stop)
         used = sum(p["notional_usd"] / fx for p in st["positions"].values())
         notional_eur = min(notional_eur, CFG["max_total_notional_x_equity"] * equity - used)
         if notional_eur * fx < sim.MIN_NOTIONAL_USD:
             msg = f"SKIPPED {c}: 1%-risk size ${notional_eur*fx:.2f} < Hyperliquid min ${sim.MIN_NOTIONAL_USD:.0f}"
-            signals[c] += " BLOCKED: " + msg; log.append(msg); continue
+            signals[c] += " BLOCKED: " + msg; log.append(msg)
+            st.setdefault("min_order_skips", []).insert(0, dict(ts=iso(t0), coin=c, side="LONG" if side > 0 else "SHORT", size_usd=round(notional_eur * fx, 2), min_usd=sim.MIN_NOTIONAL_USD))
+            st["min_order_skips"] = st["min_order_skips"][:100]; st["min_order_skips_total"] = st.get("min_order_skips_total", 0) + 1; continue
         lev = notional_eur / equity  # isolated margin model: margin = notional / max(lev,1)
         fee = notional_eur * sim.TAKER_FEE; st["balance_eur"] -= fee; st["fees_eur"] += fee
         qty = notional_eur * fx / entry
         st["positions"][c] = dict(side=side, entry=entry, stop=stop, qty=qty, notional_usd=notional_eur * fx, lev=round(lev, 3),
                                   liq=sim.liq_price(entry, side, max(lev, 1.0001)), margin_eur=notional_eur / max(lev, 1), open_ts=t0, checked_ts=t0,
-                                  fund_ts=t0, fees_eur=fee, funding_eur=0.0, strategy=strat["version"], risk_eur=equity * sim.RISK_PER_TRADE,
+                                  fund_ts=t0, fees_eur=fee, funding_eur=0.0, strategy=strat["version"], tp=tp, risk_eur=equity * sim.RISK_PER_TRADE,
                                   book_at_entry=bk)
-        log.append(f"OPENED {c} {'LONG' if side>0 else 'SHORT'} {qty:.6g} @ {entry:.6g} stop {stop:.6g} lev {lev:.2f}x")
+        log.append(f"OPENED {c} {'LONG' if side>0 else 'SHORT'} {qty:.6g} @ {entry:.6g} stop {stop:.6g}{f' tp {tp:.6g}' if tp else ''} lev {lev:.2f}x")
     # ---------- 5. persist ----------
     upnl = sum(((data[c]["book"]["mid"] if "book" in data.get(c, {}) else p["entry"]) - p["entry"]) * p["qty"] * p["side"] / fx for c, p in st["positions"].items())
     for c, p in st["positions"].items():
@@ -168,6 +182,13 @@ def main(pf=None):
     con.execute("insert into exec_log values(?,?,?)", (iso(t0), status, json.dumps(dict(problems=problems, actions=log, signals=signals))))
     con.execute("insert into runs values(?,?,?,?,?,?,?)", (iso(t0), trigger_source(), status, round((now_ms()-t0)/1000, 1), equity, len(log), len(problems)))
     con.commit()
+    try:   # research5 phase evaluator (plug-in); action 'pause' blocks new entries from the next cycle on
+        import plugins
+        r = plugins.phase_eval(con, st["created"], float(CUR_PF.get("start_balance", CFG["start_balance_eur"])))
+        if r:
+            if r["action"] == "pause" and st.get("phase_action") != "pause": log.append(f"PHASE PAUSE: {r['recommendation']}")
+            st.update(phase=r, phase_action=r["action"], phase_note=r["recommendation"])
+    except Exception as e: problems.append(f"phase eval failed: {e}")
     json.dump(st, open(STATE_F + ".tmp", "w"), indent=1); os.replace(STATE_F + ".tmp", STATE_F)
     with open(LOG_F, "a") as f: f.write(f"{iso(t0)} {status} trigger={trigger_source()!r} equity={equity:.4f} actions={log} problems={problems}\n")
     print(f"[{pf['name']} {strat['version']}]", end=" ")
@@ -214,9 +235,10 @@ def hf_portfolios():
 def post_steps():
     import subprocess
     if os.environ.get("GDM_NO_WATCHDOG"): return
-    for name, cmd in (("watchdog", ["bash", "watchdog.sh"]), ("publish", ["bash", "publish.sh"])):
+    import sys as _s
+    for name, cmd in (("watchdog", ["bash", "watchdog.sh"]), ("box_feed", [_s.executable, "box_feed.py"]), ("publish", ["bash", "publish.sh"])):
         try:
-            r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=200)
             out = (r.stdout.strip().splitlines() or [r.stderr.strip()[-200:]])[-1]
             print(f"  {name}:", out)
             if name == "publish": open("logs/publish.log", "a").write(f"{iso(now_ms())} rc={r.returncode} {out}\n")

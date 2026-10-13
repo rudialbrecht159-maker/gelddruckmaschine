@@ -1,42 +1,46 @@
 # GELDDRUCKMASCHINE Trading Session: SIMULATED paper trading only (virtual money, public market data, no keys, no orders).
-# Only users with write access (the repo owner) can run workflow_dispatch -> control is protected by GitHub login.
+# Only users with write access (the repo owner) can run workflow_dispatch -> every control action is protected by GitHub login.
+# STOP path: the running engine reads this workflow's run list every 5 s (read-only, GITHUB_TOKEN) and reacts to the run-name below,
+# so a STOP is seen as soon as GitHub has created the dispatched run (no runner start needed). The control job is audit/fallback.
 name: trading-session
+run-name: "${{ inputs.action == 'start' && format('start · €{0} · {1} min · {2}', inputs.capital, inputs.minutes, inputs.strategy) || inputs.action == 'close_all' && (inputs.confirm == 'CLOSE ALL' && 'close_all CONFIRMED' || 'close_all REJECTED (confirm fehlt)') || inputs.action }}"
 on:
   workflow_dispatch:
     inputs:
-      action:   {description: "start | stop | close_all", required: true, default: start, type: choice, options: [start, stop, close_all]}
-      capital:  {description: "Virtual capital EUR (paper, start only)", required: false, default: "100"}
-      minutes:  {description: "Duration minutes 1..180 (presets 10/15/30/60/120/180)", required: false, default: "60"}
-      strategy: {description: "Strategy (start only)", required: false, default: trend-4h-v1, type: choice,
-                 options: [trend-4h-v1, funding-fade-4h-x1, breakout-1h-v1, test-breakout1h-filtered, test-hf-zscore-5m]}
-      confirm:  {description: "close_all only: type CLOSE ALL", required: false, default: ""}
-permissions: {contents: write}
-env: {GDM_HOST: github-actions, GDM_NO_WATCHDOG: "1", GDM_NO_MIRROR: "1"}
+      action:   {description: "start | stop | close_all | resume", required: true, default: start, type: choice, options: [start, stop, close_all, resume]}
+      capital:  {description: "Virtuelles Kapital EUR (Paper, nur start)", required: false, default: "100"}
+      minutes:  {description: "Dauer Minuten 1..180, 0 = unbegrenzt (pausiert am Job-Limit)", required: false, default: "60"}
+      strategy: {description: "Strategie (nur start)", required: false, default: funding-fade-4h-x1, type: choice, options: [funding-fade-4h-x1, trend-4h-v1]}
+      confirm:  {description: "nur close_all: exakt CLOSE ALL eintippen", required: false, default: ""}
+      chain:    {description: "OPT-IN: am Job-Limit automatisch Folge-Job starten (ToS-Risiko, siehe README)", required: false, default: false, type: boolean}
+permissions: {contents: write, actions: write}
+env: {GDM_HOST: github-actions, GDM_NO_WATCHDOG: "1", GDM_NO_MIRROR: "1", GDM_SYNC: "1", GDM_STORE: /tmp/none}
 jobs:
   control:
-    if: inputs.action != 'start'
+    if: inputs.action == 'stop' || inputs.action == 'close_all'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: confirm check
         if: inputs.action == 'close_all' && inputs.confirm != 'CLOSE ALL'
         run: |
-          echo "::error::close_all rejected: confirm input must be exactly 'CLOSE ALL'"
+          echo "::error::close_all abgelehnt: confirm muss exakt 'CLOSE ALL' sein"
           exit 1
       - uses: actions/checkout@v4
-      - name: commit control file (running session polls it every loop)
+      - name: commit control file (audit + fallback channel)
         run: |
-          mkdir -p sessions
-          printf '{"action":"%s","ts":"%s","by":"%s","run":"%s"}\n' "${{ inputs.action }}" "$(date -u '+%Y-%m-%d %H:%M:%S')" "${{ github.actor }}" "${{ github.run_id }}" > sessions/control.json
+          mkdir -p store
+          printf '{"action":"%s","ts":"%s","by":"%s","run":"%s"}\n' "${{ inputs.action }}" "$(date -u '+%Y-%m-%d %H:%M:%S')" "${{ github.actor }}" "${{ github.run_id }}" > store/control.json
           git config user.name "gelddruckmaschine-bot"; git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
-          git add sessions/control.json && git commit -qm "session control: ${{ inputs.action }} (SIMULATED)"
-          for i in 1 2 3 4 5; do git pull --rebase -q -X theirs && git push -q && break; sleep 4; done
-          cat sessions/control.json
+          git add store/control.json && git commit -qm "session control: ${{ inputs.action }} (SIMULATED)"
+          for i in 1 2 3 4 5; do git fetch -q origin main && git merge -q --no-edit -X theirs origin/main && git push -q origin HEAD:main && break; sleep 4; done
+          cat store/control.json
   session:
-    if: inputs.action == 'start'
+    if: inputs.action == 'start' || inputs.action == 'resume'
     runs-on: ubuntu-latest
-    timeout-minutes: 200          # sessions are capped at 180 min (+ time to manage open positions); hard GitHub limit 6 h
+    timeout-minutes: 185          # job budget 170 min (config.session.job_budget_min) + final sync; hard GitHub limit 6 h
     concurrency: {group: trading-session, cancel-in-progress: false}
+    env: {GITHUB_TOKEN: "${{ github.token }}"}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -45,19 +49,23 @@ jobs:
       - name: connectivity check (Hyperliquid public info API)
         run: |
           curl -s -m 15 -X POST https://api.hyperliquid.xyz/info -H 'Content-Type: application/json' -d '{"type":"allMids"}' | python -c "import json,sys;d=json.load(sys.stdin);print('Hyperliquid reachable, BTC mid',d['BTC'])"
-      - name: run session (60 s loop), state committed every 2 min
+      - name: run session (tick 60 s, control poll 5 s, state sync 60 s)
+        id: run
         run: |
           set -u
-          M="${{ inputs.minutes }}"; python -c "import sys;m=float('$M');sys.exit(0 if 1<=m<=180 else 1)" || { echo "::error::minutes must be 1..180"; exit 1; }
+          M="${{ inputs.minutes }}"; python -c "import sys;m=float('$M');sys.exit(0 if m==0 or 1<=m<=180 else 1)" || { echo "::error::minutes muss 0 (unbegrenzt) oder 1..180 sein"; exit 1; }
           git config user.name "gelddruckmaschine-bot"; git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
-          sync() { git add -A sessions public 2>/dev/null; git commit -qm "session state $(date -u +%T) (SIMULATED)" || true; for i in 1 2 3; do git pull --no-rebase --no-edit -q && git push -q && break; sleep 3; done; }
-          ( while sleep 120; do sync >/dev/null 2>&1; done ) & SYNC=$!
-          CMD='git fetch -q origin main 2>/dev/null; git show origin/main:sessions/control.json 2>/dev/null || echo {}'
-          if python session.py status | grep -q '"status": "\(running\|stopping\)"'; then echo "resuming unfinished session from committed state"; python session.py resume --control-cmd "$CMD" || true
-          else python session.py start --capital "${{ inputs.capital }}" --minutes "$M" --strategy "${{ inputs.strategy }}" --control-cmd "$CMD" || true; fi
-          kill $SYNC 2>/dev/null || true; sync; python session.py status | head -c 2500
-      - name: final commit (always; a crashed job resumes from committed state on next start)
+          rc=0
+          if [ "${{ inputs.action }}" = resume ]; then python session.py resume || rc=$?
+          else python session.py start --capital "${{ inputs.capital }}" --minutes "$M" --strategy "${{ inputs.strategy }}" || rc=$?; fi
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"; python session.py status | head -c 2500
+      - name: final sync (always; a crashed/cancelled job resumes from committed state on next START)
         if: always()
+        run: bash sync.sh "session final $(date -u +%T) (SIMULATED)" || true
+      - name: chain follow-up job (OPT-IN only, default OFF)
+        if: steps.run.outputs.rc == '10' && inputs.chain
         run: |
-          git add -A sessions public 2>/dev/null; git commit -qm "session final $(date -u +%T) (SIMULATED)" || true
-          for i in 1 2 3; do git pull --no-rebase --no-edit -q && git push -q && break; sleep 3; done
+          N=$(python -c "import json;c=json.load(open('store/sessions/current.json'));s=json.load(open('store/sessions/'+c['id']+'/session.json'));print(len(s.get('jobs',[])))")
+          MAX=$(python -c "import json;print(json.load(open('config.json'))['session']['max_chain'])")
+          if [ "$N" -lt "$MAX" ]; then gh workflow run session.yml -R "${{ github.repository }}" -f action=resume -f chain=true; echo "chained job $((N+1))/$MAX"; else echo "max_chain $MAX reached -> stays paused"; fi
+        env: {GH_TOKEN: "${{ github.token }}"}

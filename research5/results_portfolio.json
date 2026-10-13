@@ -1,0 +1,58 @@
+{
+ "corr_daily_oos": 0.163,
+ "corr_daily_oos_active_days": 0.163,
+ "is": {
+  "net_pct": 0.45,
+  "net_eur": 0.23,
+  "gross_eur": 1.41,
+  "fees_eur": 0.14,
+  "funding_eur": 1.05,
+  "maxdd_pct": 10.13,
+  "trades": 14,
+  "trades_per_month": 1.1,
+  "win_pct": 14.3,
+  "pf": 1.05,
+  "sharpe": 0.09,
+  "dsr": 0.004,
+  "p_le0": 0.523,
+  "halted": true,
+  "missed_maker": 0,
+  "skipped_min": 99,
+  "days": 374.7
+ },
+ "is_maker": -9.2,
+ "oos": {
+  "net_pct": 13.25,
+  "net_eur": 6.63,
+  "gross_eur": 7.09,
+  "fees_eur": 0.58,
+  "funding_eur": -0.11,
+  "maxdd_pct": 8.62,
+  "trades": 50,
+  "trades_per_month": 3.7,
+  "win_pct": 34.0,
+  "pf": 1.5,
+  "sharpe": 0.83,
+  "dsr": 0.032,
+  "p_le0": 0.19,
+  "halted": false,
+  "missed_maker": 0,
+  "skipped_min": 186,
+  "days": 416.5
+ },
+ "oos_maker": 11.77,
+ "folds": [
+  -1.77,
+  0.17,
+  12.28,
+  12.26
+ ],
+ "by_strategy": {
+  "S1": -5.14,
+  "S5": 11.77
+ },
+ "n_by_strategy": {
+  "S1": 24,
+  "S5": 26
+ }
+}

@@ -1,0 +1,152 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GELDDRUCKMASCHINE · Paper Trading</title><meta name="theme-color" content="#070b1a">
+<script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+<style>
+:root{--bg:#070b1a;--card:rgba(22,28,58,.55);--bd:rgba(140,150,255,.16);--tx:#e8ebff;--mu:#8b93c7;--gr:#22e39a;--rd:#ff5c7a;--bl:#4f8cff;--vi:#9b6bff;--or:#ffb547}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,Segoe UI,Roboto,sans-serif}
+body{background:radial-gradient(1200px 600px at 15% -10%,rgba(155,107,255,.22),transparent 60%),radial-gradient(900px 500px at 100% 10%,rgba(79,140,255,.18),transparent 60%),var(--bg);min-height:100vh;padding-bottom:110px}
+.wrap{max-width:1180px;margin:0 auto;padding:14px 14px 0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.02) inset,0 10px 40px rgba(60,40,160,.18);margin-bottom:14px}
+.mu{color:var(--mu)}.sm{font-size:12px}.xs{font-size:11px}.pos{color:var(--gr)}.neg{color:var(--rd)}.b{font-weight:700}
+header{text-align:center;padding:8px 0 4px}.logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;font-size:20px}
+.logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--bl),var(--vi));box-shadow:0 0 22px rgba(155,107,255,.6);display:grid;place-items:center;font-style:normal;font-size:18px}
+.sub{letter-spacing:.18em;font-size:11px;color:var(--mu);margin-top:6px}
+.pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.06em;border:1px solid var(--bd)}
+.paper{background:rgba(255,181,71,.12);color:var(--or);border-color:rgba(255,181,71,.35)}
+.health{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.g{background:var(--gr);box-shadow:0 0 10px var(--gr)}.r{background:var(--rd);box-shadow:0 0 10px var(--rd)}.n{background:#59608a}
+.alert{border-color:rgba(255,92,122,.5);background:rgba(255,92,122,.10)}.alert.o{border-color:rgba(255,181,71,.5);background:rgba(255,181,71,.08)}
+.eq{text-align:center}.eqv{font-size:clamp(46px,13vw,84px);font-weight:800;letter-spacing:-.02em;line-height:1;margin:6px 0;font-variant-numeric:tabular-nums}
+.eqv small{font-size:.42em;color:var(--mu);font-weight:700}
+.ms{position:relative;height:10px;border-radius:99px;background:rgba(255,255,255,.06);margin:16px 4px 6px;overflow:visible}
+.ms b{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--bl),var(--vi),var(--gr));box-shadow:0 0 14px rgba(155,107,255,.6)}
+.ms span{position:absolute;top:14px;transform:translateX(-50%);font-size:11px;color:var(--mu)}
+.grid{display:grid;gap:14px}@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}}@media(min-width:1100px){.g3{grid-template-columns:1.2fr 1fr}}
+.pos-h{display:flex;align-items:center;gap:10px}.coin{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff}
+.badge{padding:3px 9px;border-radius:8px;font-size:12px;font-weight:800}.L{background:rgba(34,227,154,.15);color:var(--gr)}.S{background:rgba(255,92,122,.15);color:var(--rd)}
+.big{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums}
+.bar{position:relative;height:6px;background:rgba(255,255,255,.08);border-radius:9px;margin:30px 6px 26px}
+.mk{position:absolute;top:-4px;width:2px;height:14px;background:#aab}.mk em{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:10px;font-style:normal;white-space:nowrap;color:var(--mu)}
+.mk.u em{top:16px}.cur{position:absolute;top:-5px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(155,107,255,.35),0 0 18px #9b6bff;animation:gl 1.6s infinite}
+@keyframes gl{50%{box-shadow:0 0 0 7px rgba(155,107,255,.15),0 0 26px #9b6bff}}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:10px}.kv div{background:rgba(255,255,255,.03);border-radius:12px;padding:8px}.kv span{display:block;font-size:11px;color:var(--mu)}
+.tp{display:inline-block;background:linear-gradient(90deg,#22e39a,#4f8cff);color:#04131a;font-weight:800;border-radius:999px;padding:6px 14px;animation:pop 1.2s ease-out 3}
+@keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1)}}
+.hm{display:grid;grid-template-columns:44px repeat(24,1fr);gap:2px;font-size:9px}.hm div{height:18px;border-radius:4px;background:rgba(255,255,255,.04);display:grid;place-items:center}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:7px 6px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06);white-space:nowrap}th{color:var(--mu);font-weight:600;font-size:11px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px}.tabs button{flex:0 0 auto;background:rgba(255,255,255,.04);color:var(--mu);border:1px solid var(--bd);border-radius:999px;padding:8px 14px;font-weight:700;font-size:13px}
+.tabs button.on{background:linear-gradient(90deg,rgba(79,140,255,.35),rgba(155,107,255,.35));color:#fff}
+.dock{position:fixed;left:0;right:0;bottom:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(7,11,26,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--bd);z-index:9}
+.dock .in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr auto;gap:10px}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:800;letter-spacing:.06em;border-radius:16px;padding:14px 10px;font-size:15px;border:0;cursor:pointer;color:#fff}
+.st{background:linear-gradient(135deg,#1fb87d,#22e39a);box-shadow:0 0 22px rgba(34,227,154,.35);color:#03140d}.sp{background:linear-gradient(135deg,#4f8cff,#9b6bff);box-shadow:0 0 22px rgba(155,107,255,.4)}
+.em{background:#7a1426;border:1px solid #ff5c7a;font-size:12px;padding:14px 12px}
+dialog{background:#11163a;color:var(--tx);border:1px solid var(--bd);border-radius:20px;max-width:440px;width:92%}dialog::backdrop{background:rgba(0,0,0,.6)}
+input,select{background:#0c1130;color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:9px;font-size:15px;width:100%}
+label{font-size:12px;color:var(--mu);display:block;margin:8px 0 4px}code,.code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:rgba(0,0,0,.35);border-radius:8px;padding:8px;display:block;white-space:pre-wrap;word-break:break-all}
+.empty{color:var(--mu);text-align:center;padding:20px;font-size:13px}.disc{opacity:.6}.vw{background:rgba(255,92,122,.15);color:var(--rd);padding:2px 7px;border-radius:6px;font-size:10px;font-weight:800}
+.vk{background:rgba(34,227,154,.15);color:var(--gr);padding:2px 7px;border-radius:6px;font-size:10px;font-weight:800}.vo{background:rgba(255,181,71,.15);color:var(--or);padding:2px 7px;border-radius:6px;font-size:10px;font-weight:800}
+#chart{height:360px}
+</style></head><body><div class="wrap">
+<header><div class="logo"><i>₿</i>GELDDRUCKMASCHINE</div><div class="sub" id="sub">PERPS · 5 MAJORS · Laufzeit –</div>
+<div style="margin-top:8px"><span class="pill paper">PAPER TRADING · SIMULATION – virtuelles Geld, keine echten Orders</span></div><div class="health" id="health"></div></header>
+<div id="alerts"></div>
+<section class="card eq" id="eqc"></section>
+<div class="grid g3"><section class="card" id="posc"></section><section class="card" id="ctl"></section></div>
+<div class="grid g2"><section class="card" id="hmc"></section><section class="card" id="clc"></section></div>
+<section class="card"><div class="tabs" id="tabs"></div><div id="tab"></div></section>
+<section class="card" id="setc"></section>
+<p class="xs mu" style="text-align:center" id="foot"></p></div>
+<div class="dock"><div class="in"><a class="btn st" id="bstart" target="_blank" rel="noopener">▶ START</a><a class="btn sp" id="bstop" target="_blank" rel="noopener">■ STOP</a><button class="btn em" id="bem">NOTFALL<br>CLOSE</button></div></div>
+<dialog id="dlg"><h3 style="margin-top:0;color:var(--rd)">Notfall-Close – alle Paper-Positionen sofort schließen?</h3>
+<p class="sm">Schließt alle offenen <b>simulierten</b> Positionen der laufenden Session zum Marktpreis (inkl. Kosten) und beendet sie. Das ist nicht rückgängig zu machen.</p>
+<label>Zur Bestätigung <b>CLOSE ALL</b> eintippen</label><input id="cfi" autocomplete="off" autocapitalize="characters">
+<p class="sm mu">Danach öffnet sich GitHub → „Run workflow“ → action = <b>close_all</b>, confirm = <b>CLOSE ALL</b> → Run. Ohne dieses Feld lehnt der Workflow ab.</p>
+<div style="display:flex;gap:10px"><button class="btn" style="background:#2a2f55" onclick="dlg.close()">Abbrechen</button><button class="btn em" id="cfb" disabled>Weiter zu GitHub</button></div></dialog>
+<script>
+const REPO="rudialbrecht159-maker/gelddruckmaschine",WF=`https://github.com/${REPO}/actions/workflows/session.yml`;
+const SRC=[{u:`https://api.github.com/repos/${REPO}/contents/public/data.json?ref=main`,h:{Accept:"application/vnd.github.raw"}},{u:`https://raw.githubusercontent.com/${REPO}/main/public/data.json`},{u:"data.json"}];
+const $=id=>document.getElementById(id),TZ="Europe/Berlin";let D=null,TAB="chart",CH=null,LAST=null;
+const P=s=>s?new Date(s.replace(" ","T").replace(/Z?$/,"Z")):null;
+const hm=s=>s?P(s).toLocaleTimeString("de-DE",{timeZone:TZ,hour:"2-digit",minute:"2-digit",second:"2-digit"}):"–";
+const dtf=s=>s?P(s).toLocaleString("de-DE",{timeZone:TZ,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"–";
+const f=(v,d=2)=>v==null||isNaN(v)?"–":Number(v).toLocaleString("de-DE",{minimumFractionDigits:d,maximumFractionDigits:d});
+const eur=(v,d=2)=>v==null?"–":`<span class="${v>=0?"pos":"neg"}">${v>=0?"+":"−"}€${f(Math.abs(v),d)}</span>`;
+const fp=v=>v==null?"–":v>=1000?f(v,1):v>=10?f(v,3):f(v,4);
+const age=s=>s?(Date.now()-P(s))/1000:1e9;
+const CC={BTC:"#f7931a",ETH:"#627eea",SOL:"#9945ff",AVAX:"#e84142",SUI:"#4da2ff"};
+const VB=v=>v==="DISCARD"?'<span class="vw">VERWORFEN</span>':v==="KEEP"?'<span class="vk">BEHALTEN · EXPERIMENTELL</span>':v?'<span class="vo">BEOBACHTEN</span>':"";
+async function load(){for(const s of SRC){try{const r=await fetch(s.u+(s.u.includes("?")?"&":"?")+"t="+Date.now(),{headers:s.h||{},cache:"no-store"});if(!r.ok)continue;const d=await r.json();if(!D||d.generated>=D.generated){D=d;D._src=s.u.split("/")[2]||"pages"}return render()}catch(e){}}if(!D)$("eqc").innerHTML='<div class="empty">Keine Daten erreichbar.</div>'}
+function cur(){const s=D.session||{};return {s,p:s.portfolio||null}}
+function countUp(el,to){const from=LAST??to;LAST=to;const t0=performance.now(),dur=900;const step=t=>{const k=Math.min(1,(t-t0)/dur),v=from+(to-from)*(1-Math.pow(1-k,3));const [i,c]=f(v,2).split(",");el.innerHTML=`€${i}<small>,${c}</small>`;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+function render(){
+ const {s,p}=cur(),H=D.health||{};
+ const run=s.status==="running"||s.status==="stopping";const act=run?(Date.now()-P(s.started))/60000:s.actual_min;
+ $("sub").textContent=`PERPS · 5 MAJORS · Laufzeit ${s.id?String(Math.floor(act/60)).padStart(2,"0")+":"+String(Math.floor(act%60)).padStart(2,"0"):"–"} / ${s.id?(s.unlimited?"∞":f(s.planned_min/60,s.planned_min%60?1:0)+"H"):"–"}`;
+ const sh=H.session||{},bx=H.box||{};const sOk=run&&age(sh.heartbeat)<(sh.ok_max_age_s||180)+90;
+ $("health").innerHTML=`<span class="pill"><i class="dot ${run?(sOk?"g":"r"):"n"}"></i>Session-Engine ${run?(sOk?"live":"kein Heartbeat"):"inaktiv"} · ♥ ${hm(sh.heartbeat)}</span><span class="pill"><i class="dot ${age(bx.last_run)<7200?"g":"r"}"></i>Box stündlich · ${dtf(bx.last_run)}</span><span class="pill">Letzte Marktdaten ${hm(sh.last_data||bx.last_data)}</span>`;
+ $("alerts").innerHTML=(D.alerts||[]).slice(0,6).map(a=>`<div class="card alert ${a.level==="red"?"":"o"} sm"><b>${a.level==="red"?"⛔":"⚠"} ${a.scope}</b> · ${a.text} <span class="mu">${dtf(a.ts)}</span></div>`).join("");
+ // equity
+ if(p){const st=p.start_eur||s.capital_eur,e=p.equity_eur,g=e-st,m=e/st,fx=p.fx_eurusd;
+  const lg=x=>Math.max(0,Math.min(1,Math.log2(Math.max(x,1))/4));
+  $("eqc").innerHTML=`<div class="sm mu">EQUITY · ${s.status==="ended"?"letzte Session (beendet)":"Session "+(s.status_text||"")} · ${s.strategy}</div><div class="eqv" id="eqv"></div>
+  <div>${eur(g)} <span class="mu">(${g>=0?"+":""}${f(g/st*100,2)} % seit Start)</span>${fx?` · <span class="mu">≈ $${f(e*fx,2)}</span>`:""}</div><div class="sm" style="margin-top:4px"><b>${f(m,2).replace(/0$/,"")}x</b> <span class="mu">from €${f(st,0)}</span></div>
+  <div class="ms"><b style="width:${lg(m)*100}%"></b>${[2,4,8,16].map((x,i)=>`<span style="left:${(i+1)*25}%">x${x}</span>`).join("")}</div><div style="height:14px"></div>`;countUp($("eqv"),e)}
+ else $("eqc").innerHTML='<div class="empty">Noch keine Session. Starte eine mit ▶ START.</div>';
+ // positions
+ const ps=(p&&p.positions)||[];const recentTp=(D.closes||[]).find(t=>t.reason==="tp"&&age(t.close_ts)<1800);
+ $("posc").innerHTML=(recentTp?`<div style="margin-bottom:10px"><span class="tp">TP HIT ${eur(recentTp.pnl_eur)} · ${recentTp.coin}</span></div>`:"")+(ps.length?ps.map(posCard).join("<hr style='border-color:rgba(255,255,255,.06)'>"):`<div class="sm mu">AKTIVE POSITION</div><div class="empty">Keine offene Position${run?" – Bot analysiert jede Minute (Einstiege nur auf geschlossenen Kerzen).":"."}</div>`);
+ ps.forEach(q=>spark(q.coin));
+ // control status
+ const ak=s.stop_ack;$("ctl").innerHTML=`<div class="sm mu">SESSION</div><div class="big" style="font-size:22px">${s.status_text||"–"}</div>
+ <div class="kv"><div><span>Strategie</span><b>${s.strategy||"–"}</b></div><div><span>Kapital</span><b>€${f(s.capital_eur,0)}</b></div><div><span>Geplant</span><b>${s.id?(s.unlimited?"unbegrenzt":f(s.planned_min,0)+" min"):"–"}</b></div><div><span>Ist-Laufzeit</span><b>${s.id?f(run?act:s.actual_min,1)+" min":"–"}</b></div><div><span>Start</span><b>${dtf(s.started)}</b></div><div><span>Ende</span><b>${dtf(s.ended)}</b></div></div>
+ ${ak?`<div class="card" style="margin:12px 0 0;padding:12px;border-color:rgba(34,227,154,.4)"><b class="pos">${ak.action==="close_all"?"NOTFALL-CLOSE":"STOP"} bestätigt um ${hm(ak.acked)}</b><div class="xs mu">Latenz Dispatch → Engine: ${f(ak.latency_s,1)} s · gesendet ${hm(ak.dispatched)} · Kanal ${ak.source}</div></div>`:""}
+ ${s.report?`<div class="kv"><div><span>Netto</span><b>${eur(s.report.net_pnl_eur,4)}</b></div><div><span>Gebühren</span><b>€${f(s.report.fees_eur,4)}</b></div><div><span>Trades</span><b>${s.report.trades}</b></div><div><span>Stop-Grund</span><b>${s.report.stop_reason||"–"}</b></div></div>`:""}
+ <div class="xs mu" style="margin-top:10px">Log: ${(s.log||[]).slice(-4).map(x=>x.slice(11,19)+" "+x.slice(21,110)).join("<br>")||"–"}</div>`;
+ heat();closes();tabs();settings();
+ $("foot").innerHTML=`Daten: ${D._src} · erzeugt ${dtf(D.generated)} (Berlin) · Aktualisierung alle 75 s · Quelle: eine Datei public/data.json aus dem einen Store. Alle Zahlen simuliert.`}
+function posCard(q){const L=q.side==="LONG",pc=(q.mark-q.entry)/q.entry*(L?1:-1)*100;const pts=[q.liq,q.stop,q.entry,q.mark,q.tp].filter(x=>x);const lo=Math.min(...pts),hi=Math.max(...pts),x=v=>((v-lo)/(hi-lo||1))*100;
+ return `<div class="pos-h"><div class="coin" style="background:${CC[q.coin]||"#555"}">${q.coin[0]}</div><div><b>${q.coin}</b> <span class="mu sm">PERP</span><br><span class="badge ${L?"L":"S"}">${q.side} ${f(q.lev,2)}x</span></div><div style="margin-left:auto;text-align:right"><div class="big ${q.upnl_eur>=0?"pos":"neg"}">${q.upnl_eur>=0?"+":"−"}€${f(Math.abs(q.upnl_eur),3)}</div><div class="sm ${pc>=0?"pos":"neg"}">${pc>=0?"+":""}${f(pc,2)} %</div></div></div>
+ <canvas id="sp_${q.coin}" height="50" style="width:100%;height:50px;margin-top:8px"></canvas>
+ <div class="bar">${[["LIQ",q.liq],["STOP",q.stop],["ENTRY",q.entry],["TP",q.tp]].filter(a=>a[1]).map((a,i)=>`<i class="mk ${i%2?"u":""}" style="left:${x(a[1])}%;${a[0]==="STOP"||a[0]==="LIQ"?"background:var(--rd)":a[0]==="TP"?"background:var(--gr)":""}"><em>${a[0]} ${fp(a[1])}</em></i>`).join("")}<i class="cur" style="left:${x(q.mark)}%"></i></div>
+ <div class="kv"><div><span>Einstieg</span><b>${fp(q.entry)}</b></div><div><span>Aktuell</span><b>${fp(q.mark)}</b></div><div><span>Größe</span><b>$${f(q.notional_usd,2)}</b></div><div><span>Risiko €</span><b>€${f(q.risk_eur,3)}</b></div><div><span>Verlust bei Stop</span><b>€${f(q.stop_loss_eur,3)}</b></div><div><span>Kosten (gesch.)</span><b>€${f(q.est_exit_cost_eur+q.fees_eur,3)}</b></div></div><div class="xs mu" style="margin-top:6px">Ausstieg: ${q.exit_rule} · offen seit ${dtf(q.open_ts)}</div>`}
+function spark(c){const cv=$("sp_"+c),k=(D.candles&&D.candles.coins||{})[c];if(!cv||!k)return;const v=k.slice(-48).map(r=>r[4]),w=cv.clientWidth*2,h=100;cv.width=w;cv.height=h;const g=cv.getContext("2d"),lo=Math.min(...v),hi=Math.max(...v);
+ const gr=g.createLinearGradient(0,0,w,0);gr.addColorStop(0,"#4f8cff");gr.addColorStop(1,"#9b6bff");g.strokeStyle=gr;g.lineWidth=3;g.beginPath();v.forEach((y,i)=>{const X=i/(v.length-1)*w,Y=h-6-(y-lo)/(hi-lo||1)*(h-12);i?g.lineTo(X,Y):g.moveTo(X,Y)});g.stroke()}
+function heat(){const h=D.heatmap||{cells:[]};const m={};h.cells.forEach(c=>m[c.coin+"|"+c.hour]=c);const mx=Math.max(.0001,...h.cells.map(c=>Math.abs(c.net)));
+ let g='<div class="hm"><div></div>'+[...Array(24)].map((_,i)=>`<div class="mu" style="background:none">${i%3?"":i}</div>`).join("");
+ ["BTC","ETH","SOL","AVAX","SUI"].forEach(c=>{g+=`<div style="background:none;justify-content:start" class="b">${c}</div>`;for(let i=0;i<24;i++){const e=m[c+"|"+i];g+=e?`<div title="${c} ${i}:00 · ${e.w}W/${e.l}L · €${f(e.net,4)}" style="background:${e.net>=0?`rgba(34,227,154,${.25+.75*Math.abs(e.net)/mx})`:`rgba(255,92,122,${.25+.75*Math.abs(e.net)/mx})`}">${e.w+e.l}</div>`:"<div></div>"}});
+ $("hmc").innerHTML=`<div class="sm mu">COIN × STUNDE (Berlin, Schlusszeit echter geschlossener Trades)</div><div class="kv"><div><span>Gewinner</span><b class="pos">${h.wins||0} W</b></div><div><span>Verlierer</span><b class="neg">${h.losses||0} L</b></div><div><span>Trefferquote</span><b>${h.win_pct==null?"–":f(h.win_pct,1)+" %"}</b></div><div><span>Netto</span><b>${eur(h.net_eur,3)}</b></div></div><div class="scroll" style="margin-top:10px">${h.cells.length?g+"</div>":'<div class="empty">Noch keine geschlossenen Trades.</div>'}</div>`}
+function closes(){const c=(D.closes||[]).slice(0,25);$("clc").innerHTML=`<div class="sm mu">CLOSES · letzte geschlossene Trades (alle Portfolios)</div>`+(c.length?`<div class="scroll"><table><tr><th>Zeit</th><th>Coin</th><th>Seite</th><th>Grund</th><th>Netto</th><th>Gebühr</th><th>Portfolio</th></tr>${c.map(t=>`<tr><td>${dtf(t.close_ts)}</td><td><b>${t.coin}</b></td><td><span class="badge ${t.side==="LONG"?"L":"S"}">${t.side}</span></td><td>${t.reason==="tp"?"🎯 TP":t.reason}</td><td>${eur(t.pnl_eur,4)}</td><td class="mu">€${f(t.fees_eur,4)}</td><td class="xs mu">${t.portfolio}</td></tr>`).join("")}</table></div>`:'<div class="empty">Noch keine geschlossenen Trades.</div>')}
+const TABS=[["chart","Chart"],["equity","Equity"],["strat","Strategien"],["sess","Session-Reports"],["phase","Phasen"],["act","Aktivität"]];
+function tabs(){$("tabs").innerHTML=TABS.map(t=>`<button class="${TAB===t[0]?"on":""}" onclick="TAB='${t[0]}';tabs()">${t[1]}</button>`).join("");const T=$("tab");if(CH){CH.remove();CH=null}
+ if(TAB==="chart"){const k=D.candles&&D.candles.coins;if(!k){T.innerHTML='<div class="empty">Keine Kerzendaten.</div>';return}const cs=Object.keys(k);const sel=window._coin&&k[window._coin]?window._coin:cs[0];
+  T.innerHTML=`<div class="tabs">${cs.map(c=>`<button class="${c===sel?"on":""}" onclick="_coin='${c}';tabs()">${c}</button>`).join("")}</div><div id="chart"></div><div class="xs mu">Echte Hyperliquid-${D.candles.tf}-Kerzen · ▲▼ simulierte Ein-/Ausstiege · Zeit Berlin</div>`;
+  CH=LightweightCharts.createChart($("chart"),{layout:{background:{color:"transparent"},textColor:"#8b93c7"},grid:{vertLines:{color:"rgba(255,255,255,.04)"},horzLines:{color:"rgba(255,255,255,.04)"}},timeScale:{timeVisible:true},localization:{timeFormatter:t=>new Date(t*1000).toLocaleString("de-DE",{timeZone:TZ,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}});
+  const se=CH.addCandlestickSeries({upColor:"#22e39a",downColor:"#ff5c7a",borderVisible:false,wickUpColor:"#22e39a",wickDownColor:"#ff5c7a"});se.setData(k[sel].map(r=>({time:r[0]/1000,open:r[1],high:r[2],low:r[3],close:r[4]})));
+  const t0=k[sel][0][0]/1000,mk=[];(D.closes||[]).filter(t=>t.coin===sel).forEach(t=>{const a=P(t.open_ts)/1000,b=P(t.close_ts)/1000,bar=x=>Math.floor(x/14400)*14400;if(a>=t0)mk.push({time:bar(a),position:t.side==="LONG"?"belowBar":"aboveBar",color:"#4f8cff",shape:t.side==="LONG"?"arrowUp":"arrowDown",text:"E"});if(b>=t0)mk.push({time:bar(b),position:"aboveBar",color:t.pnl_eur>=0?"#22e39a":"#ff5c7a",shape:"circle",text:t.reason})});
+  ((cur().p||{}).positions||[]).filter(q=>q.coin===sel).forEach(q=>{se.createPriceLine({price:q.stop,color:"#ff5c7a",lineStyle:2,title:"STOP"});se.createPriceLine({price:q.entry,color:"#4f8cff",title:"ENTRY"});if(q.tp)se.createPriceLine({price:q.tp,color:"#22e39a",title:"TP"})});
+  mk.sort((a,b)=>a.time-b.time);se.setMarkers(mk);CH.timeScale().fitContent();return}
+ if(TAB==="equity"){const ps=(D.portfolios||[]).filter(p=>p.equity_curve&&p.equity_curve.length>1);if(!ps.length){T.innerHTML='<div class="empty">Noch keine Equity-Daten.</div>';return}
+  T.innerHTML='<div id="chart"></div><div class="xs mu">Equity in % seit Start je Portfolio (echte geloggte Werte)</div>';CH=LightweightCharts.createChart($("chart"),{layout:{background:{color:"transparent"},textColor:"#8b93c7"},grid:{vertLines:{visible:false},horzLines:{color:"rgba(255,255,255,.04)"}},timeScale:{timeVisible:true}});
+  const col=["#9b6bff","#4f8cff","#22e39a","#ffb547","#ff5c7a","#5ce1e6","#c084fc"];ps.forEach((p,i)=>{const s=CH.addLineSeries({color:col[i%7],lineWidth:p.source==="session"?3:2,title:(p.code||"")+" "+(p.source==="session"?"Session":p.strategy)});const seen=new Set();s.setData(p.equity_curve.map(r=>({time:Math.floor(P(r[0])/1000),value:(r[1]/p.start_eur-1)*100})).filter(r=>!seen.has(r.time)&&seen.add(r.time)))});CH.timeScale().fitContent();return}
+ if(TAB==="strat"){const ps=D.portfolios||[],bt=(D.backtests||{}).rows||[];
+  T.innerHTML=`<div class="sm mu">LIVE-PAPER-PORTFOLIOS (gleiches Engine/Limits)</div><div class="scroll"><table><tr><th>Portfolio</th><th>Strategie</th><th>Urteil</th><th>Equity</th><th>Rendite</th><th>MaxDD</th><th>Trades</th><th>Win</th><th>Min-Order-Skips</th><th>Phase</th></tr>${ps.map(p=>`<tr class="${p.verdict==="DISCARD"?"disc":""}"><td>${p.source==="session"?"Session":p.role}</td><td>${p.code?p.code+" ":""}${p.strategy}</td><td>${VB(p.verdict)}</td><td>€${f(p.equity_eur,2)}</td><td class="${p.ret_pct>=0?"pos":"neg"}">${f(p.ret_pct,2)} %</td><td>${f(p.maxdd_pct,2)} %</td><td>${p.trades}</td><td>${p.win_rate==null?"–":f(p.win_rate,0)+" %"}</td><td>${p.min_order_skips_total||0}</td><td>${p.phase?p.phase.label_de:"–"}</td></tr>`).join("")}</table></div>
+  <div class="sm mu" style="margin-top:16px">BACKTEST research5 (OOS, Taker-Kosten, Live-Limits) – SIMULIERT, kein Live-Ergebnis</div><div class="scroll"><table><tr><th>Strategie</th><th>TF</th><th>Netto %</th><th>PF</th><th>MaxDD %</th><th>Trades</th><th>/Mon</th><th>2× Kosten</th><th>DSR</th><th>Folds %</th><th>Urteil</th></tr>${bt.map(r=>`<tr class="${r.verdict==="DISCARD"?"disc":""}"><td>${r.name}</td><td>${r.tf}</td><td class="${r.net_pct>=0?"pos":"neg"}">${f(r.net_pct,1)}</td><td>${f(r.pf,2)}</td><td>${f(r.maxdd_pct,1)}</td><td>${r.trades}</td><td>${f(r.trades_per_month,1)}</td><td>${f(r.cost2x,1)}</td><td>${f(r.dsr,3)}</td><td class="xs">${(r.folds||[]).join(" / ")}</td><td>${VB(r.verdict)}</td></tr>`).join("")}</table></div><div class="xs mu">Kein Ergebnis ist statistisch belegt (alle DSR ≤ 0,16). Verworfene Strategien laufen stündlich unverändert weiter (Daten bleiben), werden aber nicht als Session angeboten.</div>`;return}
+ if(TAB==="sess"){const ss=D.sessions||[];T.innerHTML=ss.length?`<div class="scroll"><table><tr><th>Start</th><th>Strategie</th><th>Kapital</th><th>Geplant</th><th>Ist</th><th>Status</th><th>Stop-Grund</th><th>Netto</th><th>Trades</th><th>Jobs</th><th>Fehler</th></tr>${ss.map(s=>`<tr><td>${dtf(s.started)}</td><td>${s.strategy}</td><td>€${f(s.capital_eur,0)}</td><td>${s.unlimited?"∞":f(s.planned_min,0)+" min"}</td><td>${f(s.actual_min,1)} min</td><td>${s.status}</td><td>${s.stop_reason||"–"}${s.stop_ack?` · ack ${f(s.stop_ack.latency_s,1)} s`:""}</td><td>${s.net_eur==null?"–":eur(s.net_eur,4)}</td><td>${s.trades??"–"}</td><td>${(s.jobs||[]).length}${s.resumes?` (${s.resumes} Resume)`:""}</td><td>${s.errors}</td></tr>`).join("")}</table></div>`:'<div class="empty">Noch keine Sessions.</div>';return}
+ if(TAB==="phase"){const ph=D.phases||[];T.innerHTML=ph.length?ph.map(r=>`<div style="margin-bottom:14px"><b>${r.portfolio}</b> · ${r.strategy} ${r.verdict_de?`<span class="xs mu">(${r.verdict_de})</span>`:""}<div class="sm"><span class="${r.action==="pause"?"vw":r.action==="extend"?"vo":"vk"}">${r.label_de}</span> ${r.recommendation}</div><div class="scroll"><table><tr><th>Phase</th><th>Status</th><th>Netto €</th><th>Trades</th><th>MaxDD %</th><th>Netto−bester</th></tr>${(r.phases||[]).map(x=>`<tr><td>${x.phase}</td><td>${x.status==="INCONCLUSIVE"?"UNENTSCHIEDEN":x.status}</td><td>${f(x.net_eur,2)}</td><td>${x.trades}</td><td>${f(x.maxdd_pct,2)}</td><td>${f(x.net_minus_best_eur,2)}</td></tr>`).join("")}</table></div></div>`).join("")+'<div class="xs mu">Phasenregeln (research5/phases.py) unverändert: P1 0–7 d, P2 7–21 d, P3 21–35 d, dann monatlich. Strategien mit wenigen Trades (<30) gelten als UNENTSCHIEDEN/VERLÄNGERN, nie als bestanden. Aktion „pause“ sperrt neue Einstiege automatisch.</div>':'<div class="empty">Noch keine Phasenbewertung.</div>';return}
+ if(TAB==="act"){const p=cur().p||{};const sk=(D.portfolios||[]).flatMap(x=>(x.min_order_skips||[]).map(k=>({...k,pf:x.strategy}))).sort((a,b)=>a.ts<b.ts?1:-1).slice(0,20);
+  T.innerHTML=`<div class="sm mu">SESSION-AKTIVITÄT (letzte Analysezyklen)</div><div class="scroll"><table><tr><th>Zeit</th><th>Status</th><th>Aktionen / Probleme</th></tr>${(p.feed||[]).slice(0,15).map(e=>`<tr><td>${hm(e.ts)}</td><td>${e.status}</td><td class="xs">${[...(e.actions||[]),...(e.problems||[])].join(" · ")||"Analyse: "+Object.keys(e.signals||{}).length+" Märkte, kein Signal"}</td></tr>`).join("")||'<tr><td colspan=3 class="empty">–</td></tr>'}</table></div>
+  <div class="sm mu" style="margin-top:14px">MINDESTORDER-SKIPS (Signal zu klein für $10 Hyperliquid-Minimum – Limit wird bewusst nicht erhöht)</div><div class="scroll"><table><tr><th>Zeit</th><th>Portfolio</th><th>Coin</th><th>Seite</th><th>Größe</th></tr>${sk.map(k=>`<tr><td>${dtf(k.ts)}</td><td>${k.pf}</td><td>${k.coin}</td><td>${k.side}</td><td>$${f(k.size_usd,2)} &lt; $${k.min_usd}</td></tr>`).join("")||'<tr><td colspan=5 class="empty">Keine Skips protokolliert.</td></tr>'}</table></div>`}}
+function settings(){const c=(D.config||{}).session||{},lc=D.config||{};const sv=JSON.parse(localStorage.gdm||"{}");const cap=sv.cap||c.capital_eur||100,str=sv.str||c.strategy,min=sv.min??c.duration_min;
+ $("setc").innerHTML=`<div class="sm mu">EINSTELLUNGEN → erzeugt die Werte für GitHub „Run workflow“</div><div class="grid g2"><div><label>Virtuelles Kapital (€)</label><input id="s_cap" type="number" min="10" value="${cap}"></div><div><label>Strategie</label><select id="s_str">${(c.strategies||[]).map(s=>`<option ${s===str?"selected":""} value="${s}">${s} – ${((lc.verdicts||{})[s]||{}).label_de||""}</option>`).join("")}</select></div>
+ <div><label>Dauer</label><select id="s_min">${(c.presets_min||[10,15,30,60,120,180,0]).map(m=>`<option ${+m===+min?"selected":""} value="${m}">${m?m+" min":"unbegrenzt (pausiert nach ~170 min am Job-Limit)"}</option>`).join("")}</select></div><div><label>Hebel-Obergrenze</label><input disabled value="${lc.leverage_cap}x (hart max ${lc.leverage_hard_max}x, nur per config.json)"></div></div>
+ <div class="code" id="s_out" style="margin-top:12px"></div><div class="xs mu" style="margin-top:6px">Risiko unverändert: 1 % pro Trade · 3 % Tagesverlust-Stopp · 10 % Max-Drawdown-Halt · max. 2 Positionen · $10 Mindestorder · jeder Trade mit Stop-Loss.</div>`;
+ const up=()=>{const v={cap:+$("s_cap").value,str:$("s_str").value,min:+$("s_min").value};localStorage.gdm=JSON.stringify(v);
+  $("s_out").textContent=`So startest du (iPhone/iPad):\n1. ▶ START tippen → GitHub öffnet „trading-session“\n2. „Run workflow“ tippen und eintragen:\n   action = start\n   capital = ${v.cap}\n   minutes = ${v.min}${v.min?"":"  (0 = unbegrenzt)"}\n   strategy = ${v.str}\n   chain = aus (Standard)\n3. Grün „Run workflow“ tippen. Nach ~1 min ist die Session hier live.\n\nSTOP: ■ STOP → Run workflow → action = stop → Run.\n\nCLI: gh workflow run session.yml -R ${REPO} -f action=start -f capital=${v.cap} -f minutes=${v.min} -f strategy=${v.str}`};
+ ["s_cap","s_str","s_min"].forEach(i=>$(i).oninput=up);up()}
+$("bstart").href=WF;$("bstop").href=WF;$("bstop").onclick=()=>alert("GitHub öffnet sich: „Run workflow“ → action = stop → Run.\nDie Engine erkennt den STOP wenige Sekunden nach dem Absenden; Bestätigung erscheint hier als „STOP bestätigt um …“.");
+$("bem").onclick=()=>{$("cfi").value="";$("cfb").disabled=true;dlg.showModal()};$("cfi").oninput=e=>$("cfb").disabled=e.target.value.trim()!=="CLOSE ALL";
+$("cfb").onclick=()=>{dlg.close();window.open(WF,"_blank")};
+load();setInterval(()=>{if(!document.hidden)load()},75000);setInterval(()=>{if(D&&cur().s.status==="running")$("sub")&&render()},60000);
+</script></body></html>

@@ -39,7 +39,7 @@ def pstats(pf, cfg):
                 funding_eur=round(p["funding_eur"], 4), risk_eur=round(p.get("risk_eur", 0), 4),
                 stop_loss_eur=round(abs(p["entry"] - p["stop"]) * p["qty"] / (st.get("fx_eurusd") or 1.12), 4),
                 est_exit_cost_eur=round(p["notional_usd"] / (st.get("fx_eurusd") or 1.12) * (0.00045 + 0.0003 + 0.0001), 4),
-                exit_rule=EXIT_RULES.get(pf["strat"]["name"], "strategy stop / signal exit"), open_ts=dt.datetime.fromtimestamp(p["open_ts"]/1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%SZ")) for k, p in st["positions"].items()]
+                exit_rule=EXIT_RULES.get(pf["strat"]["name"], "strategy stop / signal exit") + (" · TP" if p.get("tp") else ""), tp=p.get("tp"), open_ts=dt.datetime.fromtimestamp(p["open_ts"]/1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%SZ")) for k, p in st["positions"].items()]
     return dict(id=pf["name"], role=pf.get("role") or ("ACTIVE" if pf["primary"] else "SHADOW"), strategy=s["version"], tf=s["tf"], params=s["params"], evidence=s.get("evidence", ""),
                 start_eur=start, equity_eur=round(st["equity_eur"], 4), balance_eur=round(st["balance_eur"], 4), realized_eur=round(st["realized_eur"], 4),
                 upnl_eur=round(st["upnl_eur"], 4), fees_eur=round(st["fees_eur"], 4), funding_eur=round(st["funding_eur"], 4),
@@ -47,7 +47,9 @@ def pstats(pf, cfg):
                 win_rate=round(len(w) / len(tr) * 100, 1) if tr else None, pf=round(sum(t["pnl_eur"] for t in w) / gl, 2) if gl > 0 else None,
                 halted=st["halted"], halt_reason=st["halt_reason"], status=st["last_status"], last_cycle=st["last_cycle"], last_data_ok=st["last_data_ok"],
                 risk=st["risk"], problems=st["last_problems"], signals=st["last_signals"], actions=st["last_actions"],
-                positions=pos, trade_history=tr, evals=dict(cycles=n_runs, market_evaluations=n_ev, last=last_ev), rejected=rejected[::-1][:150], equity_curve=[[t, round(v, 4)] for t, v in eq[-1000:]], _logs=logs)
+                positions=pos, trade_history=tr, evals=dict(cycles=n_runs, market_evaluations=n_ev, last=last_ev), rejected=rejected[::-1][:150], equity_curve=[[t, round(v, 4)] for t, v in eq[-1000:]], _logs=logs,
+                phase=st.get("phase"), phase_action=st.get("phase_action"), min_order_skips=st.get("min_order_skips", [])[:30], min_order_skips_total=st.get("min_order_skips_total", 0),
+                created=st.get("created"), fx_eurusd=st.get("fx_eurusd"), peak_equity_eur=st.get("peak_equity_eur"), day_start_equity_eur=st.get("day_start_equity_eur"))
 def unsci(t):
     def r(m):
         v = float(m.group(0)); return f"{v:,.1f}" if v >= 1000 else f"{v:.4g}"
@@ -144,5 +146,5 @@ def build(PORTFOLIOS, cfg):
                 portfolios=ports, feed=feed(ports), markers=markers(ports), signal_markers=sigm, candles=candles,
                 market={c: v for c, v in json.load(open("state/state.json")).get("market", {}).items()})
     os.makedirs("public", exist_ok=True)
-    json.dump(data, open("public/data.json.tmp", "w"), separators=(",", ":")); os.replace("public/data.json.tmp", "public/data.json")
-    shutil.copyfile("web/index.html", "public/index.html")
+    # legacy per-box view only (NOT published); the one public export is store.build() -> public/data.json
+    json.dump(data, open("public/data_legacy.json.tmp", "w"), separators=(",", ":")); os.replace("public/data_legacy.json.tmp", "public/data_legacy.json")
