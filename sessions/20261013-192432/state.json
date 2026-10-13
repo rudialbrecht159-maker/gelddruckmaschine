@@ -1,38 +1,10 @@
 {
  "created": "2026-10-13 19:24:32Z",
- "balance_eur": 99.9868533597191,
+ "balance_eur": 99.9540872439281,
  "peak_equity_eur": 100.0,
  "day": "2026-10-13",
  "day_start_equity_eur": 100.0,
- "positions": {
-  "BTC": {
-   "side": 1,
-   "entry": 83260.9708,
-   "stop": 80535.89937142856,
-   "qty": 0.0003925665158582327,
-   "notional_usd": 32.68546921393005,
-   "lev": 0.292,
-   "liq": 2089.849534553548,
-   "margin_eur": 29.214756179773012,
-   "open_ts": 1791919472509,
-   "checked_ts": 1791919772499,
-   "fund_ts": 1791919472509,
-   "fees_eur": 0.013146640280897855,
-   "funding_eur": 0.0,
-   "strategy": "funding-fade-4h-x1",
-   "risk_eur": 1.0,
-   "book_at_entry": {
-    "time": 1791919473203,
-    "bid": 83235.0,
-    "ask": 83236.0,
-    "mid": 83235.5,
-    "spread_bps": 0.12014104558751976,
-    "depth10_usd": 3300613.02019
-   },
-   "mark": 83226.5,
-   "upnl_eur": -0.012095175057958709
-  }
- },
+ "positions": {},
  "last_bar_processed": {
   "BTC": 1791892800000,
   "ETH": 1791892800000,
@@ -42,14 +14,14 @@
  },
  "halted": false,
  "halt_reason": null,
- "fees_eur": 0.013146640280897855,
+ "fees_eur": 0.02628444782308374,
  "funding_eur": 0.0,
- "realized_eur": 0.0,
+ "realized_eur": -0.045912756071907236,
  "fx_eurusd": 1.1188,
- "last_data_ok": "2026-10-13 19:29:32Z",
- "cycles": 6,
+ "last_data_ok": "2026-10-13 19:31:32Z",
+ "cycles": 8,
  "fx_date": "2026-10-13",
- "last_cycle": "2026-10-13 19:29:32Z",
+ "last_cycle": "2026-10-13 19:31:32Z",
  "last_status": "OK",
  "last_problems": [],
  "last_signals": {
@@ -59,51 +31,53 @@
   "AVAX": "bar 2026-10-13 16:00:00Z close 10.232: no entry [3d funding 5.79e-06 (p10 -1.50e-06 / p90 1.43e-05), trend up] (bar already processed)",
   "SUI": "bar 2026-10-13 16:00:00Z close 1.0387: no entry [3d funding 9.30e-06 (p10 4.24e-06 / p90 1.99e-05), trend up] (bar already processed)"
  },
- "last_actions": [],
- "equity_eur": 99.97475818466114,
- "upnl_eur": -0.012095175057958709,
+ "last_actions": [
+  "CLOSED BTC emergency_close @ 83230.5"
+ ],
+ "equity_eur": 99.9540872439281,
+ "upnl_eur": 0,
  "risk": {
-  "dd": 0.0002524181533886116,
-  "daily_loss": 0.0002524181533886116,
+  "dd": 0.00045912756071897487,
+  "daily_loss": 0.00045912756071897487,
   "blocks": [
    "session Beenden \u2013 offene Positionen werden verwaltet"
   ]
  },
  "market": {
   "BTC": {
-   "mid": 83226.5,
-   "spread_bps": 0.12015403747604429,
+   "mid": 83230.5,
+   "spread_bps": 0.12014826295648831,
    "funding_1h": 1.25e-05,
-   "oi": 38316.60068,
-   "dayVlm": 3231802365.2593985
+   "oi": 38318.5999,
+   "dayVlm": 3233055617.2650676
   },
   "ETH": {
-   "mid": 2509.8500000000004,
-   "spread_bps": 0.3984301850704586,
+   "mid": 2509.3500000000004,
+   "spread_bps": 0.39850957419215743,
    "funding_1h": 1.25e-05,
-   "oi": 1077193.243799999,
-   "dayVlm": 1611067717.040727
+   "oi": 1077219.6678,
+   "dayVlm": 1611245282.1063397
   },
   "SOL": {
-   "mid": 107.775,
-   "spread_bps": 0.9278589654377282,
+   "mid": 107.67500000000001,
+   "spread_bps": 0.9287206872537836,
    "funding_1h": 1.25e-05,
-   "oi": 5851186.2,
-   "dayVlm": 439221857.35399985
+   "oi": 5852095.780000001,
+   "dayVlm": 439349639.9647999
   },
   "AVAX": {
-   "mid": 10.276499999999999,
-   "spread_bps": 0.9730939522205477,
-   "funding_1h": 2.2436e-06,
-   "oi": 2441624.4999999995,
-   "dayVlm": 13523036.572232
+   "mid": 10.2615,
+   "spread_bps": 0.9745163962395577,
+   "funding_1h": 1.5476e-06,
+   "oi": 2441585.6,
+   "dayVlm": 13524748.903202003
   },
   "SUI": {
-   "mid": 1.0546,
-   "spread_bps": 1.896453631708496,
+   "mid": 1.0538500000000002,
+   "spread_bps": 0.9489016463442518,
    "funding_1h": 1.25e-05,
-   "oi": 64529704.80000001,
-   "dayVlm": 27334817.414140016
+   "oi": 64532973.4,
+   "dayVlm": 27347252.190060012
   }
  }
 }

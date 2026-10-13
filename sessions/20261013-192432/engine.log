@@ -4,3 +4,5 @@
 2026-10-13 19:27:32Z OK trigger='non-interactive (likely hourly routine)' equity=99.9758 actions=[] problems=[]
 2026-10-13 19:28:32Z OK trigger='non-interactive (likely hourly routine)' equity=99.9793 actions=[] problems=[]
 2026-10-13 19:29:32Z OK trigger='non-interactive (likely hourly routine)' equity=99.9748 actions=[] problems=[]
+2026-10-13 19:30:32Z OK trigger='non-interactive (likely hourly routine)' equity=99.9776 actions=[] problems=[]
+2026-10-13 19:31:32Z OK trigger='non-interactive (likely hourly routine)' equity=99.9541 actions=['CLOSED BTC emergency_close @ 83230.5'] problems=[]
