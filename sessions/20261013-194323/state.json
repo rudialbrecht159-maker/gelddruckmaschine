@@ -18,18 +18,18 @@
  "funding_eur": 0.0,
  "realized_eur": 0.0,
  "fx_eurusd": 1.1188,
- "last_data_ok": "2026-10-13 20:00:24Z",
- "cycles": 18,
+ "last_data_ok": "2026-10-13 20:05:45Z",
+ "cycles": 20,
  "fx_date": "2026-10-13",
- "last_cycle": "2026-10-13 20:00:24Z",
+ "last_cycle": "2026-10-13 20:05:45Z",
  "last_status": "OK",
  "last_problems": [],
  "last_signals": {
-  "BTC": "bar 2026-10-13 20:00:00Z close 83,270.0: no entry",
-  "ETH": "bar 2026-10-13 20:00:00Z close 2,507.8: no entry",
-  "SOL": "bar 2026-10-13 20:00:00Z close 107.520: no entry",
-  "AVAX": "bar 2026-10-13 20:00:00Z close 10.263: no entry",
-  "SUI": "bar 2026-10-13 20:00:00Z close 1.0533: no entry"
+  "BTC": "bar 2026-10-13 20:00:00Z close 83,270.0: no entry (bar already processed)",
+  "ETH": "bar 2026-10-13 20:00:00Z close 2,507.8: no entry (bar already processed)",
+  "SOL": "bar 2026-10-13 20:00:00Z close 107.520: no entry (bar already processed)",
+  "AVAX": "bar 2026-10-13 20:00:00Z close 10.263: no entry (bar already processed)",
+  "SUI": "bar 2026-10-13 20:00:00Z close 1.0533: no entry (bar already processed)"
  },
  "last_actions": [],
  "equity_eur": 200.0,
@@ -41,39 +41,39 @@
  },
  "market": {
   "BTC": {
-   "mid": 83281.5,
-   "spread_bps": 0.12007468645497499,
+   "mid": 83255.5,
+   "spread_bps": 0.12011218478058507,
    "funding_1h": 1.25e-05,
-   "oi": 38333.25354,
-   "dayVlm": 3213614259.7545986
+   "oi": 38311.29582,
+   "dayVlm": 3188780485.3337884
   },
   "ETH": {
-   "mid": 2507.45,
-   "spread_bps": 0.3988115416056514,
+   "mid": 2509.55,
+   "spread_bps": 0.3984778147473015,
    "funding_1h": 1.25e-05,
-   "oi": 1074924.0994000002,
-   "dayVlm": 1607558531.77746
+   "oi": 1073221.3228,
+   "dayVlm": 1598086521.6725802
   },
   "SOL": {
-   "mid": 107.515,
-   "spread_bps": 0.9301027763559415,
+   "mid": 107.625,
+   "spread_bps": 0.9291521486634988,
    "funding_1h": 1.25e-05,
-   "oi": 5815813.64,
-   "dayVlm": 441193676.8307998
+   "oi": 5816203.26,
+   "dayVlm": 438845229.0824
   },
   "AVAX": {
-   "mid": 10.2595,
-   "spread_bps": 0.9747063697055859,
-   "funding_1h": -2.2783e-06,
-   "oi": 2440783.02,
-   "dayVlm": 13211913.522112003
+   "mid": 10.2725,
+   "spread_bps": 0.973472864443364,
+   "funding_1h": 9.6859e-06,
+   "oi": 2440952.24,
+   "dayVlm": 13131644.975562003
   },
   "SUI": {
-   "mid": 1.0532499999999998,
-   "spread_bps": 0.9494422027058059,
+   "mid": 1.0557500000000002,
+   "spread_bps": 0.9471939379586926,
    "funding_1h": 1.25e-05,
-   "oi": 64353712.8,
-   "dayVlm": 27540434.60621001
+   "oi": 64327529.2,
+   "dayVlm": 27499075.822550017
   }
  }
 }
