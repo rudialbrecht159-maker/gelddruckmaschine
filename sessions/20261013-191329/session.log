@@ -4,3 +4,6 @@
 2026-10-13 19:17:30Z STATE -> stopping (user stop)
 2026-10-13 19:17:51Z ENGINE ERROR OperationalError: attempt to write a readonly database
 2026-10-13 19:21:30Z STATE -> stopping (user stop) FORCE CLOSE
+2026-10-13 19:21:34Z ENGINE ERROR OperationalError: attempt to write a readonly database
+2026-10-13 19:22:48Z ACTIONS ['CLOSED BTC emergency_close @ 83245.5']
+2026-10-13 19:22:48Z ENDED report={"start_capital_eur": 100.0, "end_capital_eur": 99.9716, "net_pnl_eur": -0.0284, "return_pct": -0.0284, "trades": 1, "wins": 0, "gross_pnl_eur": -0.0021, "fees_eur": 0.0263, "funding_eur": 0.0, "planned_minutes": 10.0, "actual_minutes": 9.3, "started": "2026-10-13 19:13:29Z", "ended": "2026-10-13 19:22:48Z", "stop_reason": "user stop", "loops": 10, "market_evaluations": 40, "rejected_or_no_entry": 5, "engine_errors": 2, "strategy": "funding-fade-4h-x1", "simulated": true}
