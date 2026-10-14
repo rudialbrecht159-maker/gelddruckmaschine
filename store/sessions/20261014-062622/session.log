@@ -1,3 +1,4 @@
 2026-10-14 06:26:22Z START capital=€200.0 minutes=120.0 strategy=funding-fade-4h-x1
 2026-10-14 06:26:22Z RUN job=38522166380 status=running resume=False
 2026-10-14 08:26:23Z STATE -> stopping (timeout)
+2026-10-14 08:26:42Z ENDED report={"start_capital_eur": 200.0, "end_capital_eur": 200.0, "net_pnl_eur": 0.0, "return_pct": 0.0, "trades": 0, "wins": 0, "gross_pnl_eur": 0, "fees_eur": 0.0, "funding_eur": 0.0, "planned_minutes": 120.0, "actual_minutes": 120.3, "started": "2026-10-14 06:26:22Z", "ended": "2026-10-14 08:26:42Z", "stop_reason": "timeout", "loops": 121, "market_evaluations": 605, "min_order_skips": 0, "engine_errors": 0, "resumes": 0, "jobs": 1, "stop_ack": null, "strategy": "funding-fade-4h-x1", "simulated": true}

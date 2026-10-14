@@ -18,10 +18,10 @@
  "funding_eur": 0.0,
  "realized_eur": 0.0,
  "fx_eurusd": 1.1188,
- "last_data_ok": "2026-10-14 08:25:23Z",
- "cycles": 120,
+ "last_data_ok": "2026-10-14 08:26:23Z",
+ "cycles": 121,
  "fx_date": "2026-10-13",
- "last_cycle": "2026-10-14 08:25:23Z",
+ "last_cycle": "2026-10-14 08:26:23Z",
  "last_status": "OK",
  "last_problems": [],
  "last_signals": {
@@ -37,48 +37,50 @@
  "risk": {
   "dd": 0.0,
   "daily_loss": 0.0,
-  "blocks": []
+  "blocks": [
+   "session Beenden \u2013 offene Positionen werden verwaltet"
+  ]
  },
  "market": {
   "BTC": {
-   "mid": 83787.5,
-   "spread_bps": 0.11934954497985976,
+   "mid": 83806.5,
+   "spread_bps": 0.11932248691927237,
    "funding_1h": 1.25e-05,
-   "oi": 37950.66746,
-   "dayVlm": 1933753242.3495893
+   "oi": 37949.39812,
+   "dayVlm": 1933970954.6733892
   },
   "ETH": {
-   "mid": 2515.05,
-   "spread_bps": 0.3976064094149581,
+   "mid": 2516.25,
+   "spread_bps": 0.39741679086085957,
    "funding_1h": 1.25e-05,
-   "oi": 1088527.5866,
-   "dayVlm": 887729445.0042903
+   "oi": 1088527.1814000001,
+   "dayVlm": 887745664.3881301
   },
   "SOL": {
-   "mid": 107.85499999999999,
-   "spread_bps": 0.9271707384919676,
+   "mid": 107.89500000000001,
+   "spread_bps": 0.9268270077394797,
    "funding_1h": 1.25e-05,
-   "oi": 5866528.420000001,
-   "dayVlm": 230654644.4834
+   "oi": 5866580.32,
+   "dayVlm": 230658526.70939994
   },
   "AVAX": {
-   "mid": 10.24,
-   "spread_bps": 1.9531249999989175,
+   "mid": 10.2385,
+   "spread_bps": 0.9767055721064825,
    "funding_1h": 1.25e-05,
-   "oi": 2410327.0,
-   "dayVlm": 7406921.854860003
+   "oi": 2410317.0,
+   "dayVlm": 7407024.734860004
   },
   "SUI": {
    "mid": 1.0593499999999998,
    "spread_bps": 0.9439750790578091,
-   "funding_1h": -4.3743e-06,
-   "oi": 64191893.6,
-   "dayVlm": 10694204.637899999
+   "funding_1h": -4.6406e-06,
+   "oi": 64191958.8,
+   "dayVlm": 10694631.996139998
   }
  },
  "phase": {
   "start": "2026-10-14 06:26 UTC",
-  "evaluated_at": "2026-10-14 08:25 UTC",
+  "evaluated_at": "2026-10-14 08:26 UTC",
   "start_equity": 200.0,
   "criteria": {
    "net_positive": "Netto > 0 nach Geb\u00fchren",
