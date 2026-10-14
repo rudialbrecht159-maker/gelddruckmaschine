@@ -5,12 +5,12 @@
  "strategy": "funding-fade-4h-x1",
  "strategy_role": "BEHALTEN \u2013 experimentell (niedrige\u2013mittlere Zuversicht)",
  "strategy_tf": "4h",
- "status": "running",
+ "status": "stopping",
  "started": "2026-10-14 06:26:22Z",
  "started_ts": 1791959182.34651,
  "ends_at": "2026-10-14 08:26:22Z",
  "ends_ts": 1791966382.34651,
- "loops": 119,
+ "loops": 120,
  "errors": 0,
  "resumes": 0,
  "host": "github-actions",
@@ -25,7 +25,8 @@
  },
  "log_tail": [
   "2026-10-14 06:26:22Z START capital=\u20ac200.0 minutes=120.0 strategy=funding-fade-4h-x1",
-  "2026-10-14 06:26:22Z RUN job=38522166380 status=running resume=False"
+  "2026-10-14 06:26:22Z RUN job=38522166380 status=running resume=False",
+  "2026-10-14 08:26:23Z STATE -> stopping (timeout)"
  ],
  "jobs": [
   {
@@ -34,14 +35,16 @@
    "started": "2026-10-14 06:26:22Z"
   }
  ],
- "heartbeat": "2026-10-14 08:24:23Z",
- "heartbeat_ts": 1791966263.3427541,
- "status_text": "L\u00e4uft \u2013 Analyse aktiv",
+ "heartbeat": "2026-10-14 08:26:23Z",
+ "heartbeat_ts": 1791966383.3430626,
+ "status_text": "Beenden \u2013 offene Positionen werden verwaltet",
  "control_api": {
-  "calls": 946,
+  "calls": 962,
   "errors": 0,
   "poll_s": 5
  },
- "last_loop": "2026-10-14 08:24:23Z",
- "last_data": "2026-10-14 08:24:42Z"
+ "last_loop": "2026-10-14 08:25:23Z",
+ "last_data": "2026-10-14 08:25:41Z",
+ "stop_reason": "timeout",
+ "stop_requested": "2026-10-14 08:26:23Z"
 }
