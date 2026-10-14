@@ -18,18 +18,18 @@
  "funding_eur": 0.0,
  "realized_eur": 0.0,
  "fx_eurusd": 1.1188,
- "last_data_ok": "2026-10-14 06:26:23Z",
- "cycles": 1,
+ "last_data_ok": "2026-10-14 06:27:22Z",
+ "cycles": 2,
  "fx_date": "2026-10-13",
- "last_cycle": "2026-10-14 06:26:23Z",
+ "last_cycle": "2026-10-14 06:27:22Z",
  "last_status": "OK",
  "last_problems": [],
  "last_signals": {
-  "BTC": "bar 2026-10-14 04:00:00Z close 83,670.0: no entry [3d funding 5.11e-06 (p10 4.47e-06 / p90 1.25e-05), trend up]",
-  "ETH": "bar 2026-10-14 04:00:00Z close 2,512.5: no entry [3d funding 3.81e-06 (p10 5.85e-06 / p90 1.25e-05), trend down]",
-  "SOL": "bar 2026-10-14 04:00:00Z close 107.810: no entry [3d funding 9.42e-06 (p10 1.86e-06 / p90 1.25e-05), trend up]",
-  "AVAX": "bar 2026-10-14 04:00:00Z close 10.309: no entry [3d funding 4.25e-06 (p10 -1.50e-06 / p90 1.43e-05), trend up]",
-  "SUI": "bar 2026-10-14 04:00:00Z close 1.0605: no entry [3d funding 9.44e-06 (p10 4.24e-06 / p90 1.99e-05), trend up]"
+  "BTC": "bar 2026-10-14 04:00:00Z close 83,670.0: no entry [3d funding 5.11e-06 (p10 4.47e-06 / p90 1.25e-05), trend up] (bar already processed)",
+  "ETH": "bar 2026-10-14 04:00:00Z close 2,512.5: no entry [3d funding 3.81e-06 (p10 5.85e-06 / p90 1.25e-05), trend down] (bar already processed)",
+  "SOL": "bar 2026-10-14 04:00:00Z close 107.810: no entry [3d funding 9.42e-06 (p10 1.86e-06 / p90 1.25e-05), trend up] (bar already processed)",
+  "AVAX": "bar 2026-10-14 04:00:00Z close 10.309: no entry [3d funding 4.25e-06 (p10 -1.50e-06 / p90 1.43e-05), trend up] (bar already processed)",
+  "SUI": "bar 2026-10-14 04:00:00Z close 1.0605: no entry [3d funding 9.44e-06 (p10 4.24e-06 / p90 1.99e-05), trend up] (bar already processed)"
  },
  "last_actions": [],
  "equity_eur": 200.0,
@@ -41,44 +41,44 @@
  },
  "market": {
   "BTC": {
-   "mid": 83502.5,
-   "spread_bps": 0.11975689350618245,
-   "funding_1h": 1.19635e-05,
-   "oi": 37823.2935,
-   "dayVlm": 1994719877.961958
+   "mid": 83480.5,
+   "spread_bps": 0.11978845359095835,
+   "funding_1h": 1.17715e-05,
+   "oi": 37824.33042,
+   "dayVlm": 1994787196.614058
   },
   "ETH": {
-   "mid": 2505.95,
-   "spread_bps": 0.39905026037993196,
-   "funding_1h": 1.25e-05,
-   "oi": 1078947.0026,
-   "dayVlm": 872820655.19243
+   "mid": 2504.45,
+   "spread_bps": 0.3992892651077445,
+   "funding_1h": 1.21725e-05,
+   "oi": 1079219.3173999998,
+   "dayVlm": 873956091.59843
   },
   "SOL": {
-   "mid": 107.36500000000001,
-   "spread_bps": 0.9314022260517967,
+   "mid": 107.255,
+   "spread_bps": 0.9323574658528849,
    "funding_1h": 1.25e-05,
-   "oi": 5810075.92,
-   "dayVlm": 224966261.06550002
+   "oi": 5810163.720000001,
+   "dayVlm": 224972945.64150003
   },
   "AVAX": {
-   "mid": 10.2015,
-   "spread_bps": 0.9802480027441511,
-   "funding_1h": -6.85e-06,
-   "oi": 2429813.0199999996,
-   "dayVlm": 7393440.120430002
+   "mid": 10.2035,
+   "spread_bps": 0.9800558631853993,
+   "funding_1h": -6.2596e-06,
+   "oi": 2429595.3599999994,
+   "dayVlm": 7396230.342220003
   },
   "SUI": {
-   "mid": 1.0519500000000002,
-   "spread_bps": 0.9506155235513948,
+   "mid": 1.0513,
+   "spread_bps": 1.9024065442783031,
    "funding_1h": 1.25e-05,
-   "oi": 64230888.6,
-   "dayVlm": 12496450.475750003
+   "oi": 64229962.0,
+   "dayVlm": 12497093.565350002
   }
  },
  "phase": {
   "start": "2026-10-14 06:26 UTC",
-  "evaluated_at": "2026-10-14 06:26 UTC",
+  "evaluated_at": "2026-10-14 06:27 UTC",
   "start_equity": 200.0,
   "criteria": {
    "net_positive": "Netto > 0 nach Geb\u00fchren",
