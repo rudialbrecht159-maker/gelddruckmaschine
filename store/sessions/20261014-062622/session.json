@@ -10,7 +10,7 @@
  "started_ts": 1791959182.34651,
  "ends_at": "2026-10-14 08:26:22Z",
  "ends_ts": 1791966382.34651,
- "loops": 58,
+ "loops": 59,
  "errors": 0,
  "resumes": 0,
  "host": "github-actions",
@@ -34,14 +34,14 @@
    "started": "2026-10-14 06:26:22Z"
   }
  ],
- "heartbeat": "2026-10-14 07:23:22Z",
- "heartbeat_ts": 1791962602.3912888,
+ "heartbeat": "2026-10-14 07:24:23Z",
+ "heartbeat_ts": 1791962663.3342612,
  "status_text": "L\u00e4uft \u2013 Analyse aktiv",
  "control_api": {
-  "calls": 457,
+  "calls": 466,
   "errors": 0,
   "poll_s": 5
  },
- "last_loop": "2026-10-14 07:23:22Z",
- "last_data": "2026-10-14 07:23:38Z"
+ "last_loop": "2026-10-14 07:24:23Z",
+ "last_data": "2026-10-14 07:24:41Z"
 }
